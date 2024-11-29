@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import backgroundLogin from '../assets/Background_lognup.jpeg';
 import logMinga from '../assets/log_minga.jpg';
 
+// Componente funcional para hacer signup
 const SignupPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({  // Datos del formulario, inicialmente vacios
     email: '',
     phone: '',
     password: '',
@@ -13,10 +14,10 @@ const SignupPage = () => {
   });
   
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target; // propiedades del objeto
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value // actualiza el estado
     }));
   };
 

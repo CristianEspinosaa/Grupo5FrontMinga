@@ -4,17 +4,19 @@ import { useDispatch } from "react-redux";
 import logMinga from "../assets/log_minga.jpg";
 import backgroundLogin from "../assets/Background_lognin.jpeg";
 
+// Componente funcional para hcaer login
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({  // Datos del formulario, inicialmente vacios
     email: "",
     password: "",
   });
 
+  // Función para manejar los cambios en los campos del formulario
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
+    const { name, value } = e.target; // propiedades del objeto
+    setFormData((prev) => ({ //uso del hook
       ...prev,
-      [name]: value,
+      [name]: value, // actualiza el estado
     }));
   };
 
