@@ -297,31 +297,31 @@ const filteredMangas = mangas.filter(manga => {
       </div>
 
       {/* Categories and Manga Grid */}
-      <div className="container mx-auto px-4 py-8">
-        {/* Categories */}
-        <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
-                selectedCategory === category.id
-                ? category.id === 'shonen' ? 'bg-red-200 text-red-800' 
-                  : category.id === 'comics' ? 'bg-orange-200 text-orange-800'
-                  : category.id === 'shojo' ? 'bg-emerald-200 text-emerald-800'
-                  : category.id === 'seinen' ? 'bg-violet-200 text-violet-800'
-                  : 'bg-blue-500 text-gray-800'
-                : `bg-gray-100 text-gray-700 hover:bg-${category.id === 'shonen' ? 'red-200' 
-                  : category.id === 'comics' ? 'orange-200'
-                  : category.id === 'shojo' ? 'emerald-200'
-                  : category.id === 'seinen' ? 'violet-200'
-                  : 'gray-200'}`
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
+<div className="container mx-auto px-1 py-2">
+  {/* Categories */}
+  <div className="flex gap-1 mb-4 flex-wrap">
+    {categories.map(category => (
+      <button
+        key={category.id}
+        onClick={() => setSelectedCategory(category.id)}
+        className={`px-3 py-1 text-sm rounded-full whitespace-nowrap transition-colors ${
+          selectedCategory === category.id
+          ? category.id === 'shonen' ? 'bg-red-200 text-red-800'
+            : category.id === 'comics' ? 'bg-orange-200 text-orange-800'
+            : category.id === 'shojo' ? 'bg-emerald-200 text-emerald-800'
+            : category.id === 'seinen' ? 'bg-violet-200 text-violet-800'
+            : 'bg-blue-500 text-gray-800'
+          : `bg-gray-100 text-gray-700 hover:bg-${category.id === 'shonen' ? 'red-200'
+            : category.id === 'comics' ? 'orange-200'
+            : category.id === 'shojo' ? 'emerald-200'
+            : category.id === 'seinen' ? 'violet-200'
+            : 'gray-200'}`
+        }`}
+      >
+        {category.name}
+      </button>
+    ))}
+  </div>
 
         {/* Manga Grid o Mensaje de No Resultados */}
         {filteredMangas.length > 0 ? (
