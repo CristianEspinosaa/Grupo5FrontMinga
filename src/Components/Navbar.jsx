@@ -32,7 +32,7 @@ const Navbar = () => {
                     </button>
                     <ul className="flex flex-col items-start mt-20 px-8 text-white space-y-6">
                         <li className="text-lg"><a href="#">Home</a></li>
-                        <li className="text-lg"><a href="#">Mangas</a></li>
+                        <li className="text-lg"><a href="/mangas">Mangas</a></li>
                     </ul>
                 </div>
             )}
