@@ -265,10 +265,10 @@ const MangasPage = () => {
 
 //filtros
 const filteredMangas = mangas.filter(manga => {
-    const matchesSearch = manga.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || manga.category_id === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const matchesSearch = manga.title.toLowerCase().startsWith(searchTerm.toLowerCase());
+  const matchesCategory = selectedCategory === 'all' || manga.category_id === selectedCategory;
+  return matchesSearch && matchesCategory;
+});
 
   return (
     <div className="min-h-screen">
