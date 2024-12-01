@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
-import backgroundImage from '../assets/foto_manga.jpeg';
+import backgroundImage from '../assets/mangaspage_read.jpeg';
 
-const MangasPage = () => {
+const MangasPageAuth = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -274,12 +274,17 @@ const filteredMangas = mangas.filter(manga => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div 
-        className="h-[50vh] bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
+    className="h-[50vh] bg-cover relative"
+    style={{ 
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundPosition: 'center 70%'  // Ajusta el porcentaje según necesites
+    }}
+>
         <div className="absolute inset-0 bg-black/50">
           <div className="container mx-auto h-full flex flex-col justify-center items-center text-white px-4">
-            <h1 className="text-5xl font-bold mb-8">Mangas</h1>
+            <h1 className="text-4xl font-bold mb-8">CompanyName</h1>
+            <h1 className="text-4xl font-bold mb-8">Or</h1>
+            <h1 className="text-4xl font-bold mb-8">AuthorName</h1>
             
             {/* Search Bar */}
             <div className="w-full max-w-xl relative">
@@ -355,9 +360,14 @@ const filteredMangas = mangas.filter(manga => {
       {manga.category_id}
     </span>
   </div>
-  <button className="w-20 py-1 px-4 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
-    Read
-  </button>
+  <div className="flex gap-2">
+    <button className="px-4 py-1 bg-violet-100 text-emerald-600 rounded-full text-sm hover:bg-violet-200 transition-colors">
+      Edit
+    </button>
+    <button className="px-4 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200 transition-colors">
+      Eliminate
+    </button>
+  </div>
 </div>
               </div>
             ))}
@@ -372,4 +382,4 @@ const filteredMangas = mangas.filter(manga => {
   );
 };
 
-export default MangasPage;
+export default MangasPageAuth;
