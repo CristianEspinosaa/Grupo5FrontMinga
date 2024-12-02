@@ -1,4 +1,5 @@
 import Navbar from './Components/Navbar.jsx'
+import NewRole from './Pages/NewRole.jsx'
 import './App.css'
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
       <Navbar>
 
       </Navbar>
+      <NewRole>
+        
+      </NewRole>
     </>
   )
 }
