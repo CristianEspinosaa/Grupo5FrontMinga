@@ -5,7 +5,6 @@ import SignupPage from './Pages/lognup_page.jsx'
 import MangasPage from './Pages/mangas_page.jsx'
 import MangasPageAuth from './Pages/mag_page_auth.jsx'
 import NewRole from './Pages/NewRole.jsx';
-import 'typeface-roboto';
 import './App.css'
 
 function App() {
