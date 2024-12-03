@@ -14,11 +14,7 @@ const EditAuthor = () => {
                     Profile
                 </h1>
             </div>
-
-            {/* Contenedor del formulario y la información del usuario */}
             <div className="fixed flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around rounded-2xl bottom-0 left-1/2 transform -translate-x-1/2 w-[90%] lg:w-[70%] h-[90vh] lg:h-[60vh] bg-white z-10 shadow-lg">
-
-                {/* Información del usuario */}
                 <div className="flex flex-col items-center p-6 rounded-lg w-full lg:w-64">
                     <img
                         src={img1}
@@ -43,8 +39,6 @@ const EditAuthor = () => {
                         <span>16/02/2000</span>
                     </div>
                 </div>
-
-                {/* Formulario debajo de la información del usuario en pantallas pequeñas */}
                 <form className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-96 sm:mt-6 lg:mt-0">
                     <input
                         type="text"
