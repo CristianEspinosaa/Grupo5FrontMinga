@@ -1,26 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import backgroundImage from '../assets/foto_manga.jpeg';
+import backgroundImage from '../assets/mangaspage_read.jpeg';
 
 const MangasPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-
-  // Función para determinar el color ligado a la categoría
-  const getLineColor = (category) => {
-    switch (category) {
-      case 'shonen':
-        return 'bg-red-500';
-      case 'comics':
-        return 'bg-red-500';
-      case 'shojo':
-        return 'bg-emerald-500';
-      case 'seinen':
-        return 'bg-violet-500';
-      default:
-        return 'bg-gray-400';
-    }
-  };
 
   const categories = [
     { id: 'all', name: 'All' },
@@ -29,6 +13,55 @@ const MangasPage = () => {
     { id: 'shojo', name: 'Shojo' },
     { id: 'seinen', name: 'Seinen' }
   ];
+
+  // Utility functions...
+  const getCategoryStyle = (categoryId) => {
+    const styles = {
+      shonen: {
+        active: 'bg-red-100 text-red-600',
+        inactive: 'bg-white/80 text-red-400 hover:bg-red-50'
+      },
+      comics: {
+        active: 'bg-orange-100 text-orange-600',
+        inactive: 'bg-white/80 text-orange-400 hover:bg-orange-50'
+      },
+      shojo: {
+        active: 'bg-emerald-100 text-emerald-600',
+        inactive: 'bg-white/80 text-emerald-400 hover:bg-emerald-50'
+      },
+      seinen: {
+        active: 'bg-violet-100 text-violet-600',
+        inactive: 'bg-white/80 text-violet-400 hover:bg-violet-50'
+      },
+      all: {
+        active: 'bg-gray-100 text-gray-600',
+        inactive: 'bg-white/80 text-gray-400 hover:bg-gray-50'
+      }
+    };
+    return styles[categoryId] || styles.all;
+  };
+
+  const getLineColor = (category) => {
+    const colors = {
+      shonen: 'bg-red-500',
+      comics: 'bg-orange-500',
+      shojo: 'bg-emerald-500',
+      seinen: 'bg-violet-500',
+      default: 'bg-gray-400'
+    };
+    return colors[category] || colors.default;
+  };
+
+  const getCategoryTextColor = (category) => {
+    const colors = {
+      shonen: 'text-red-400',
+      comics: 'text-orange-400',
+      shojo: 'text-emerald-400',
+      seinen: 'text-violet-400',
+      default: 'text-gray-400'
+    };
+    return colors[category] || colors.default;
+  };
 
   let mangas = [
     {
@@ -263,113 +296,110 @@ const MangasPage = () => {
     }
 ]
 
-//filtros
-const filteredMangas = mangas.filter(manga => {
-  const matchesSearch = manga.title.toLowerCase().startsWith(searchTerm.toLowerCase());
-  const matchesCategory = selectedCategory === 'all' || manga.category_id === selectedCategory;
-  return matchesSearch && matchesCategory;
-});
+const filteredMangas = useMemo(() => {
+  return mangas.filter(manga => {
+    const matchesSearch = manga.title.toLowerCase().startsWith(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || manga.category_id === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+}, [searchTerm, selectedCategory]);
 
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <div 
-        className="h-[50vh] bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/50">
-          <div className="container mx-auto h-full flex flex-col justify-center items-center text-white px-4">
-            <h1 className="text-5xl font-bold mb-8">Mangas</h1>
-            
-            {/* Search Bar */}
-            <div className="w-full max-w-xl relative">
-              <input
-                type="text"
-                placeholder="Find your manga here"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full py-3 px-4 rounded-full bg-white/90 text-black pr-12"
-              />
-              <Search className="absolute right-4 top-3 text-gray-500" size={24} />
+return (
+  <div className="min-h-screen bg-gray-100">
+    {/* Hero Section */}
+    <div 
+      className="min-h-[50vh] bg-cover relative"
+      style={{ 
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundPosition: 'center 70%'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/40" />
+      
+      <div className="relative max-w-7xl mx-auto space-y-8">
+        {/* Título y Búsqueda */}
+        <div className="text-center text-white space-y-6">
+          <h1 className="text-5xl font-bold">Mangas</h1>
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white/95 rounded-full shadow-lg p-2">
+              <div className="relative flex items-center">
+                <Search className="absolute left-4 text-gray-400" size={24} />
+                <input
+                  type="text"
+                  placeholder="Find your manga here"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full py-3 px-12 rounded-full bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-lg"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Categories and Manga Grid */}
-<div className="container mx-auto px-1 py-2">
-  {/* Categories */}
-  <div className="flex gap-1 mb-4 flex-wrap">
-    {categories.map(category => (
-      <button
-        key={category.id}
-        onClick={() => setSelectedCategory(category.id)}
-        className={`px-3 py-1 text-sm rounded-full whitespace-nowrap transition-colors ${
-          selectedCategory === category.id
-          ? category.id === 'shonen' ? 'bg-red-200 text-red-800'
-            : category.id === 'comics' ? 'bg-orange-200 text-orange-800'
-            : category.id === 'shojo' ? 'bg-emerald-200 text-emerald-800'
-            : category.id === 'seinen' ? 'bg-violet-200 text-violet-800'
-            : 'bg-blue-500 text-gray-800'
-          : `bg-gray-100 text-gray-700 hover:bg-${category.id === 'shonen' ? 'red-200'
-            : category.id === 'comics' ? 'orange-200'
-            : category.id === 'shojo' ? 'emerald-200'
-            : category.id === 'seinen' ? 'violet-200'
-            : 'gray-200'}`
-        }`}
-      >
-        {category.name}
-      </button>
-    ))}
-  </div>
-
-        {/* Manga Grid o Mensaje de No Resultados */}
-        {filteredMangas.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredMangas.map((manga, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative pt-[140%]">
-                  <img 
-                    src={manga.cover_photo} 
-                    alt={manga.title}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = '/api/placeholder/200/300';
-                    }}
-                  />
-                </div>
-                <div className="p-4 space-y-3">
-  <div className="flex flex-col gap-1">
-    <div className="flex items-center gap-2">
-      <div className={`w-1 h-6 ${getLineColor(manga.category_id)} rounded-full`}></div>
-      <h3 className="font-semibold text-lg">{manga.title}</h3>
-    </div>
-    <span className={`text-sm pr-60 ${
-      manga.category_id === 'shonen' ? 'text-red-400' :
-      manga.category_id === 'comics' ? 'text-orange-400' :
-      manga.category_id === 'shojo' ? 'text-emerald-400' :
-      manga.category_id === 'seinen' ? 'text-violet-400' :
-      'text-gray-400'
-    }`}>
-      {manga.category_id}
-    </span>
-  </div>
-  <button className="w-20 py-1 px-4 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
-    Read
-  </button>
-</div>
-              </div>
+        {/* Contenedor Principal de Categorías y Cards */}
+        <div className="container mx-auto px-4 -mt-10 relative z-10">
+         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6">
+          {/* Categorías */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-4 py-1.5 rounded-full text-sm transition-all duration-200 ${
+                  selectedCategory === category.id
+                    ? `${getCategoryStyle(category.id).active} shadow-sm`
+                    : `${getCategoryStyle(category.id).inactive}`
+                }`}
+              >
+                {category.name}
+              </button>
             ))}
           </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No se encontraron resultados para tu búsqueda</p>
+
+          {/* Grid de Mangas */}
+          {filteredMangas.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              {filteredMangas.map((manga, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="relative pt-[140%]">
+                    <img 
+                      src={manga.cover_photo} 
+                      alt={manga.title}
+                      className="absolute top-0 left-0 w-full h-full object-cover rounded-t-xl"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/api/placeholder/200/300';
+                      }}
+                    />
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-1 h-6 ${getLineColor(manga.category_id)} rounded-full`}></div>
+                        <h3 className="font-semibold text-lg">{manga.title}</h3>
+                      </div>
+                      <span className={`text-sm ${getCategoryTextColor(manga.category_id)}`}>
+                        {manga.category_id}
+                      </span>
+                    </div>
+                    <button className="w-20 py-1 px-4 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
+                      Read
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No results found for your search</p>
+            </div>
+          )}
           </div>
-        )}
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default MangasPage;

@@ -7,7 +7,7 @@ import MangasPageAuth from './Pages/mag_page_auth.jsx'
 import NewRole from './Pages/NewRole.jsx';
 import EditAuthor from './Pages/EditAuthor.jsx'
 import EditChapter from './Pages/EditChapter.jsx'
-import 'typeface-roboto';
+import AdminPanel from './Pages/adminPanel.jsx';
 import './App.css'
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="/newRole" element={<NewRole />} />
         <Route path="/editAuthor" element={<EditAuthor />} />
         <Route path="/editChapter" element={<EditChapter />} />
+        <Route path="/adminPanel" element={<AdminPanel />} />
       </Routes>
     </BrowserRouter>
   )
