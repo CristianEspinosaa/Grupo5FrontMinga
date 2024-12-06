@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import footerImg from "../assets/footer.png";
 
+// Importación de Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faTwitter,
+  faVimeoV,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-white text-white pb-8">
       <div className="relative w-full bg-gray-800">
         {/* Imagen de fondo */}
         <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden">
@@ -13,34 +23,31 @@ const Footer = () => {
             alt="Background"
             className="w-full h-full object-cover"
           />
-
         </div>
       </div>
 
       {/* Contenido del footer */}
-      <div className="bg-red-300 py-4 px-4 sm:px-6 lg:px-8 text-center flex flex-wrap justify-around">
-
-        <div className="bg-red-300  sm:px-6 lg:px-8 text-center flex flex-wrap justify-around items-center">
-          <div className="bg-red-500 flex flex-wrap justify-around items-center w-full">
-            {/* Enlaces */}
+      <div className="py-2 px-3 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row flex-wrap justify-around items-center h-full">
+        {/* Links principales */}
+        <div className="sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row justify-around items-center h-full mb-4 sm:mb-0">
+          <div className="flex flex-wrap justify-around items-center w-full h-full">
             <Link
               to="/home"
-              className="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="hover:bg-blue-700 text-black py-2 px-4 rounded"
             >
               Home
             </Link>
-
             <Link
               to="/mangas"
-              className="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="hover:bg-blue-700 text-black py-2 px-4 rounded"
             >
               Mangas
             </Link>
           </div>
         </div>
 
-
-        <div className=" bg-red-500 flex flex-wrap justify-around items-center">
+        {/* Sección de Logo */}
+        <div className="sm:px-6 lg:px-8 text-center flex flex-col justify-end items-center h-full">
           <svg width="191" height="48" viewBox="0 0 191 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M80.0628 0.00397865C80.1727 0.00397866 80.2698 0.00273889 80.3556 0.00164789C80.6871 -0.00257495 80.85 -0.00464631 80.9285 0.0750923C81.0042 0.152069 81.0012 0.305294 80.9953 0.606438C80.9934 0.702721 80.9912 0.814121 80.9912 0.942986C80.9971 16.1271 81 31.3132 81 46.5012L81 47.4139C81 47.9697 80.9868 47.9872 80.4007 47.9989L1.01943 47.9989C0.945641 47.9989 0.877129 47.9992 0.813553 47.9995C0.384315 48.0014 0.179314 48.0024 0.0829697 47.9013C-0.00509642 47.8088 -0.00237271 47.6312 0.0028382 47.2911C0.00424964 47.1986 0.00586708 47.0931 0.00586709 46.9751L0.00587111 0.995637C0.00587112 0.869057 0.00400193 0.75845 0.00237688 0.661812C-0.00316966 0.332676 -0.00598489 0.165433 0.0767254 0.0818525C0.161869 -0.00418798 0.337643 -0.0018877 0.694371 0.00280823C0.793087 0.00410523 0.905781 0.00559297 1.03412 0.00543277L80.0628 0.00397865ZM6.05494 5.0603C5.82138 5.0603 5.58636 5.06762 5.35133 5.08225C5.2525 5.08376 5.17231 5.16232 5.16918 5.26069C5.15449 5.49325 5.1442 5.72727 5.1442 5.96129L5.1442 42.5345C5.15888 42.811 5.21471 42.8724 5.47178 42.887C5.64367 42.8954 5.81752 42.895 5.99092 42.8945L6.10635 42.8943L45.797 42.8943C45.9178 42.8943 46.0244 42.8958 46.1183 42.8971C46.468 42.902 46.559 42.9878 46.7287 42.8189C46.8979 42.6506 46.8122 42.5607 46.8074 42.2152C46.806 42.1184 46.8045 42.008 46.8047 41.8822L46.8047 17.3845C46.8047 17.1505 46.8091 16.9164 46.8179 16.6824C46.8159 16.6234 46.8381 16.566 46.8793 16.5236C46.9206 16.4811 46.9774 16.4571 47.0368 16.4572C47.1934 16.4462 47.35 16.4454 47.5067 16.4446L47.6008 16.444L52.3235 16.444C52.4394 16.444 52.5414 16.4426 52.6312 16.4413C52.9613 16.4366 53.1258 16.4343 53.2067 16.5148C53.2871 16.5947 53.2849 16.7563 53.2806 17.0785C53.2795 17.1619 53.2783 17.2563 53.2783 17.3625C53.2783 26.9843 53.2783 32.3789 53.2783 42.0007C53.2783 42.083 53.2776 42.1578 53.277 42.2257C53.274 42.5545 53.1984 42.6408 53.3564 42.8086C53.529 42.992 53.626 42.8972 53.998 42.8951C54.0601 42.8947 54.1276 42.8943 54.2008 42.8943L73.7376 42.8943C74.0484 42.8943 74.3592 42.903 74.6695 42.9117C74.7815 42.9148 74.8934 42.9179 75.0053 42.9207C75.23 42.9207 75.2991 42.8753 75.2991 42.6398C75.3123 42.1484 75.3196 41.6584 75.3196 41.167L75.3196 6.77159C75.3196 6.51417 75.3196 6.25675 75.3108 5.99932C75.3068 5.86224 75.3061 5.745 75.3055 5.64476C75.3039 5.36122 75.303 5.2137 75.2283 5.13766C75.1473 5.05519 74.9794 5.0568 74.6294 5.06016C74.5508 5.06092 74.4629 5.06177 74.3648 5.06177L6.05494 5.0603Z" fill="#4439CC" />
             <path d="M32 43L23 43L23 17C23 16.4477 23.4477 16 24 16L31 16C31.5523 16 32 16.4477 32 17L32 43Z" fill="#4439CC" />
@@ -51,11 +58,56 @@ const Footer = () => {
 
         </div>
 
+        {/* Sección de Iconos y Botón */}
+        <div className="sm:px-6 sm:py-2 lg:px-8 text-center flex flex-col justify-center items-center space-y-4">
+          {/* Sección de Iconos */}
+          <div className="flex flex-wrap justify-around items-center space-x-6">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-[#222222] text-2xl hover:text-gray-300 transition"
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="text-[#222222] text-2xl hover:text-gray-300 transition"
+            >
+              <FontAwesomeIcon icon={faTwitter} />
+            </a>
+            <a
+              href="https://vimeo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vimeo"
+              className="text-[#222222] text-2xl hover:text-gray-300 transition"
+            >
+              <FontAwesomeIcon icon={faVimeoV} />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="text-[#222222] text-2xl hover:text-gray-300 transition"
+            >
+              <FontAwesomeIcon icon={faYoutube} />
+            </a>
+          </div>
 
-        <div className="bg-blue-800  sm:px-6 lg:px-8 text-center flex flex-wrap justify-around items-center">
-          INGA
+          {/* Botón Donate */}
+          <div className="w-100">
+            <button className="bg-gradient-to-r from-[#4436cb] to-[#5d51f2] text-white py-2 px-10 rounded-full hover:opacity-90 transition flex items-center space-x-2">
+              <span>Donate</span>
+              <FontAwesomeIcon icon={faHeart} />
+            </button>
+          </div>
         </div>
-
       </div>
     </footer>
   );
