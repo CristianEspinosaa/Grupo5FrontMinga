@@ -8,6 +8,7 @@ import NewRole from './Pages/NewRole.jsx';
 import EditAuthor from './Pages/EditAuthor.jsx'
 import EditChapter from './Pages/EditChapter.jsx'
 import AdminPanel from './Pages/adminPanel.jsx';
+import Home from './Pages/Home.jsx'
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/editAuthor" element={<EditAuthor />} />
         <Route path="/editChapter" element={<EditChapter />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
+        <Route path="/home" element={<Home/>} />
       </Routes>
     </BrowserRouter>
   )
