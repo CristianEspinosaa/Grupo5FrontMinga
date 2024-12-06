@@ -6,8 +6,8 @@ import modalActions from './actions/modalActions';
 const store = configureStore({
   reducer: {    
     register: registerReducer,
-    auth: authReducer,
-    modal: modalActions,
+    auth: authReducer,    
+    modal: modalActions
   },
 });
 
