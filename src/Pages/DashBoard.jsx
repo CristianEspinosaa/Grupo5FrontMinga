@@ -11,18 +11,15 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Función genérica para filtrar por término de búsqueda
   const filterBySearchTerm = (data) => {
     return data.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
-  // Usar useMemo para memorizar el resultado del filtrado
   const filteredCompanies = useMemo(() => filterBySearchTerm(companies), [companies, searchTerm]);
   const filteredAuthors = useMemo(() => filterBySearchTerm(authors), [authors, searchTerm]);
 
-  // Función para obtener datos según la pestaña activa
   const fetchDataForTab = async (tab) => {
     setLoading(true);
     setError(null);
@@ -62,14 +59,12 @@ const AdminPanel = () => {
         ? 'http://localhost:8080/api/dashboard/companies/toggle'
         : 'http://localhost:8080/api/dashboard/authors/toggle';
 
-      // Enviar la solicitud al backend
       await axios.put(url, data, config);
     } catch (err) {
       setError('Failed to update status. Please try again later.');
     }
   };
 
-  // Definir los colores para los autores
   const authorColors = {
     blue: 'bg-blue-500',
     red: 'bg-red-500',
@@ -79,7 +74,6 @@ const AdminPanel = () => {
 
   const getAuthorColor = (color) => authorColors[color] || 'bg-gray-500';
 
-  // Formatear la fecha de nacimiento del autor
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
@@ -88,7 +82,6 @@ const AdminPanel = () => {
     return `${day}/${month}/${year}`;
   };
 
-  // Componente reutilizable para las filas de la tabla
   const TableRow = ({ item, type }) => (
     <tr key={item._id} className="hover:bg-gray-50">
       <td className="px-6 py-4 whitespace-nowrap">
