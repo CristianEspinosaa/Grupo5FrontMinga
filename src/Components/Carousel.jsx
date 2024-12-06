@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-// Colección JSON
 const slidesData = [
      {
           id: 1,
@@ -43,13 +42,13 @@ const Carousel = () => {
      };
 
      return (
-          <div className="relative bg-gradient-to-r from-[#4436cb] to-[#5d51f2] rounded-md p-6 my-6 shadow-xl">
+          <div className="relative mt-20 bg-gradient-to-r from-[#4436cb] to-[#5d51f2] rounded-md p-6 my-6 shadow-xl h-[280px]">
                {/* Contenido de la diapositiva */}
-               <div className="flex items-center justify-center space-x-6">
-                    {/* Botón anterior */}
+               <div className="flex items-center justify-center space-x-6 translate-y-[-80px]">
+               {/* Botón anterior */}
                     <button
                          onClick={goToPreviousSlide}
-                         className="bg-[#ffffffa6] text-black rounded-full p-3 shadow-lg hover:bg-white transition-all duration-300 flex items-center justify-center"
+                         className="bg-[#ffffffa6] text-black rounded-full p-2 shadow-lg hover:bg-white transition-all duration-300 flex items-center justify-center"
                          aria-label="Previous"
                     >
                          <svg
@@ -66,33 +65,48 @@ const Carousel = () => {
 
 
                     {/* Contenido de la diapositiva actual */}
-                    <div className="flex items-center w-full space-x-6">
-                         {/* Imagen del personaje */}
-                         <img
-                              src={slidesData[currentSlide].personaje}
-                              alt={`Personaje ${slidesData[currentSlide].titulo}`}
-                              className="w-1/5 h-auto rounded-full shadow-lg border-4 border-white"
-                         />
-                         <div className="text-white w-3/5">
-                              <h3 className="text-2xl font-bold mb-4">
-                                   {slidesData[currentSlide].titulo}
-                              </h3>
-                              <p className="text-sm leading-relaxed">
-                                   {slidesData[currentSlide].descripcion}
-                              </p>
+                    <div className="w-full flex items-center justify-between">
+                         <div className=" w-full flex items-center ">
+                              <div className=" w-full  flex items-center justify-center">
+                                   {/* Imagen del personaje */}
+                                   <img
+                                        src={slidesData[currentSlide].personaje}
+                                        alt={`Personaje ${slidesData[currentSlide].titulo}`}
+                                        className="w-72 h-auto "
+                                   />
+
+                              </div>
+
+                              <div className=" w-full  flex items-center justify-center">
+                                   {/* Imagen del cómic */}
+                                   <img
+                                        src={slidesData[currentSlide].comic}
+                                        alt={`Cómic ${slidesData[currentSlide].titulo}`}
+                                        className="w-48 h-auto "
+                                   />
+
+                              </div>
+
                          </div>
-                         {/* Imagen del cómic */}
-                         <img
-                              src={slidesData[currentSlide].comic}
-                              alt={`Cómic ${slidesData[currentSlide].titulo}`}
-                              className="w-1/5 h-auto rounded-lg shadow-md"
-                         />
+
+                         <div className="w-full  translate-y-[50px]">
+                         <div className="text-white px-12 ">
+                                   <h3 className="text-2xl font-bold mb-4">
+                                        {slidesData[currentSlide].titulo}
+                                   </h3>
+                                   <p className="text-sm leading-relaxed">
+                                        {slidesData[currentSlide].descripcion}
+                                   </p>
+                              </div>
+
+                         </div>
+
                     </div>
 
                     {/* Botón siguiente */}
                     <button
                          onClick={goToNextSlide}
-                         className="bg-[#ffffffa6] text-black rounded-full p-3 shadow-lg hover:bg-white transition-all duration-300 flex items-center justify-center"
+                         className="bg-[#ffffffa6] text-black rounded-full p-2 shadow-lg hover:bg-white transition-all duration-300 flex items-center justify-center"
                          aria-label="Previous"
                     >
                          <svg
@@ -108,19 +122,6 @@ const Carousel = () => {
                     </button>
                </div>
 
-               {/* Indicadores */}
-               <div className="flex justify-center mt-6">
-                    {slidesData.map((_, index) => (
-                         <button
-                              key={index}
-                              className={`mx-1 w-4 h-4 rounded-full transition-transform duration-300 ease-in-out ${index === currentSlide
-                                        ? "bg-white scale-125"
-                                        : "bg-indigo-300"
-                                   }`}
-                              onClick={() => setCurrentSlide(index)}
-                         />
-                    ))}
-               </div>
           </div>
      );
 };
