@@ -1,0 +1,1 @@
+/* Layout diseñado para mostrar paginas con error */

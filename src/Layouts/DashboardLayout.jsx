@@ -1,0 +1,1 @@
+/* Layout diseñado para la Mangas, Manager, Admin Panel & Edit Author */
