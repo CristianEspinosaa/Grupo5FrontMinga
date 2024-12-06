@@ -1,0 +1,73 @@
+.modalContainerD {
+    background: #55555591;
+    position: fixed;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    z-index: 100000;
+  }
+
+  .modal11 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    background: #1f1e1f;
+    border-radius: 8px;
+    color: #f6f6f6;
+    border: none;
+    z-index: 10000;
+    align-items: center;
+  }
+  .spanDonate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .donar-btn{
+    height: 50px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    background-color: darkslateblue;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .donar-btn:hover{
+    background-color: rgb(52, 43, 112);
+  }
+  .donar-btn-close{
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(175, 27, 27);
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+  }

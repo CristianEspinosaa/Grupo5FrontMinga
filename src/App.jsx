@@ -1,34 +1,64 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './Components/Navbar.jsx'
-import LoginPage from './Pages/lognin_page.jsx'
-import SignupPage from './Pages/lognup_page.jsx'
-import MangasPage from './Pages/mangas_page.jsx'
-import MangasPageAuth from './Pages/mag_page_auth.jsx'
-import NewRole from './Pages/NewRole.jsx';
-import EditAuthor from './Pages/EditAuthor.jsx'
-import EditChapter from './Pages/EditChapter.jsx'
-import AdminPanel from './Pages/adminPanel.jsx';
-import Home from './Pages/Home.jsx'
-import './App.css'
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { setUser } from './store/actions/authActions';
+import axios from 'axios';
+import StandarLayout from './Layouts/StandarLayout';
+import SignRoute from './Components/SignRoute.jsx';
+import Home from './Pages/Home.jsx';
+import Login from './Pages/Login.jsx';
+import Register from './Pages/Register.jsx';
+import NotFound from './Pages/NotFound.jsx';
+import './App.css';
+
+const router = createBrowserRouter([
+  {
+    element: <StandarLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/home", element: <Home /> },
+      { path: "/register", element: <SignRoute><Register /></SignRoute> },
+      { path: "/login", element: <SignRoute><Login /></SignRoute> },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+]);
+
+const validateToken = async (token) => {
+  try {
+    const response = await axios.get("http://localhost:8080/api/users/validateToken", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.response; // Retorna el usuario si el token es válido
+  } catch (error) {
+    console.error("Error validating the token", error);
+    return null;
+  }
+};
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/mangas" element={<MangasPage />} />
-        <Route path="/manga" element={<MangasPageAuth />} />
-        <Route path="/newRole" element={<NewRole />} />
-        <Route path="/editAuthor" element={<EditAuthor />} />
-        <Route path="/editChapter" element={<EditChapter />} />
-        <Route path="/adminPanel" element={<AdminPanel />} />
-        <Route path="/home" element={<Home/>} />
-      </Routes>
-    </BrowserRouter>
-  )
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true); // Controla la pantalla de carga
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      validateToken(token).then((user) => {
+        if (user) {
+          dispatch(setUser({ user, token }));
+        }
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
+    }
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div className="loading-screen">Cargando...</div>; // Puedes personalizar este mensaje
+  }
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
