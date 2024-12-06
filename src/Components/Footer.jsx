@@ -21,11 +21,9 @@ export default function Foother() {
   };
 
   return (
-    <footer className="flex flex-col items-center min-h-[50vh] relative bg-[#faf9f9]">
-      {/* Rectángulo de imagen */}
+    <footer className="flex flex-col items-center min-h-[50vh] relative bg-[#faf9f9]">      
       <div className="bg-cover h-[18vh] w-full rounded-b-[20%] bg-[url('/rectangle.png')]"></div>
-
-      {/* Suscribirse */}
+      
       <div className="flex justify-between items-center rounded-lg absolute bg-[#f8f8f8] w-[80%] h-[18vh] top-[15vh] px-[80px] py-[30px] gap-5 shadow-[0px_85px_45px_rgba(240,240,240)]">
         <h5 id="suscribeId" className="text-black text-2xl font-normal">Subscribe</h5>
         <div className="flex gap-5 p-2 border border-[#a3a3a3] rounded-lg w-[445px]">
@@ -34,18 +32,14 @@ export default function Foother() {
         </div>
       </div>
 
-      {/* Contenido final */}
-      <div className="mt-[140px] flex justify-between items-center z-10 border-b border-[#d4d4d4] h-[14vh] w-[80vw] flex-wrap">
-        {/* Enlaces */}
+      <div className="mt-[140px] flex justify-between items-center z-10 border-b border-[#d4d4d4] h-[14vh] w-[80vw] flex-wrap">        
         <div id="ancors-footer">
           <a href="/" className="text-black font-normal ml-5">Home</a>
           <a href="/mangas" className="text-black font-normal ml-5">Comics</a>
         </div>
 
-        {/* Imagen de logo */}
         <img id="img-footer" src="/Logomr.png" alt="" className="w-[200px] h-[50px]" />
 
-        {/* Iconos y botón */}
         <div className="flex flex-col items-center justify-center h-[13vh] w-[300px]">
           <div className="flex justify-between w-[83%] pl-5 mb-3">
             <img src="/Facebook.png" alt="fb" />

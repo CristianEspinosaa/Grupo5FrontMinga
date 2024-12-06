@@ -11,7 +11,7 @@ const handleApiRequest = async (formData) => {
     return response.data;
   } catch (error) {
     const errorMessage = error.response?.data?.message || 'Error al registrar el usuario';
-    return { error: errorMessage };  // Devolvemos el error
+    return { error: errorMessage };
   }
 };
 
@@ -27,10 +27,10 @@ export const register = (formData) => async (dispatch) => {
     return true;
   }
 
-  if (result && result.error) {  // Si hay un error, lo pasamos al reducer
+  if (result && result.error) { 
     dispatch({
       type: REGISTER_FAILURE,
-      payload: result.error,  // Usamos el error que retornamos de la API
+      payload: result.error,
     });
   }
 

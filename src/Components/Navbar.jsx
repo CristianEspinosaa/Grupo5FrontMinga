@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import logo from '../assets/Logo.png';
-import closeIcon from '../assets/closeIcon.png';
 import union from '../assets/union.png';
 import UserImage from '../assets/userimage.png';
 import { logout } from "../store/actions/authActions";

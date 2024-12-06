@@ -20,19 +20,19 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: null,  // Limpiamos el error cuando comienza el proceso de registro
+        error: null,
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: null,  // Si es exitoso, no hay error
+        error: null,
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload,  // Aquí estamos guardando el error que viene de la acción
+        error: action.payload,
       };
     case SET_USER:
       return {
@@ -40,7 +40,7 @@ const authReducer = (state = initialState, action) => {
         user: action.payload.user,
         token: action.payload.token,
         loading: false,
-        error: null,  // Limpiamos el error cuando el usuario se ha seteado correctamente
+        error: null,
       };
     default:
       return state;

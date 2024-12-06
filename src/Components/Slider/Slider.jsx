@@ -1,7 +1,7 @@
 import React from 'react';
 import hero1 from '../../assets/hero1.png';
 import hero2 from '../../assets/hero2.png';
-import './Slider.css'; // Asegúrate de que la ruta del CSS sea correcta
+import './Slider.css';
 
 export default function Slider() {
   return (

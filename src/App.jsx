@@ -9,7 +9,9 @@ import Home from './Pages/Home.jsx';
 import Login from './Pages/Login.jsx';
 import Register from './Pages/Register.jsx';
 import NotFound from './Pages/NotFound.jsx';
+import DashBoard from './Pages/DashBoard.jsx';
 import './App.css';
+import AdminRoute from "./Components/AdminRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/register", element: <SignRoute><Register /></SignRoute> },
       { path: "/login", element: <SignRoute><Login /></SignRoute> },
+      { path: "/dashboard", element: <AdminRoute><DashBoard /></AdminRoute> },
       { path: "*", element: <NotFound /> },
     ],
   },
@@ -29,7 +32,7 @@ const validateToken = async (token) => {
     const response = await axios.get("http://localhost:8080/api/users/validateToken", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data.response; // Retorna el usuario si el token es válido
+    return response.data.response;
   } catch (error) {
     console.error("Error validating the token", error);
     return null;
@@ -38,7 +41,7 @@ const validateToken = async (token) => {
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true); // Controla la pantalla de carga
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -53,10 +56,6 @@ function App() {
       setIsLoading(false);
     }
   }, [dispatch]);
-
-  if (isLoading) {
-    return <div className="loading-screen">Cargando...</div>; // Puedes personalizar este mensaje
-  }
 
   return <RouterProvider router={router} />;
 }

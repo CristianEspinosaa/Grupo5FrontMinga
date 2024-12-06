@@ -46,7 +46,7 @@ const Login = () => {
     if (success) {
       navigate("/home");
     } else {
-      setErrors((prev) => ({ ...prev, backend: error || "Invalid credentials" }));
+      setErrors((prev) => ({ ...prev, backend: error || "Error try again" }));
     }
   };
 
