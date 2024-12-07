@@ -8,6 +8,7 @@ import img3 from '../assets/author-3.png';
 import img4 from '../assets/company-1.png';
 import img5 from '../assets/company-2.png';
 import img6 from '../assets/company-3.png';
+import icon1 from '../assets/img/icon.png';
 
 const NewRole = () => {
   const [selectedRole, setSelectedRole] = useState(null);

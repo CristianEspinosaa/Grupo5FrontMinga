@@ -1,6 +1,6 @@
 import React from "react";
 
-import img1 from '../src/assets/Rectangle10.png'
+import img1 from '../assets/Rectangle10.png'
 import fondo1 from '../assets/Rectangle606.png';
 import location from '../assets/location-marker.png';
 import icon1 from '../assets/icon.png';
