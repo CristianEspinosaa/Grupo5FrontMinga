@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className="flex items-center mb-6">
               <img src={user?.photo || UserImage} alt="User" className="h-10 w-10 rounded-full" />
               <div className="ml-4 text-white">
-                <p className="font-bold">Welcome,</p>
+                <p className="font-bold">Welcome,</p>                
                 <p className="text-sm">{user?.email || 'User Email'}</p>
               </div>
             </div>
@@ -54,11 +54,8 @@ const Navbar = () => {
                   {user?.role === 0 && (
                     <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>User</Link></li>
                   )}
-                  {user?.role === 1 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>Author</Link></li>
-                  )}
-                  {user?.role === 2 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>Company</Link></li>
+                  {(user?.role === 1 || user?.role === 2) && (
+                    <li><Link to="/createmanga" className="text-white text-lg" onClick={toggleMenu}>Create Manga</Link></li>
                   )}
                   <li><Link to="/profile" className="text-white text-lg" onClick={toggleMenu}>Profile</Link></li>
                   <li><Link to="/newrole" className="text-white text-lg" onClick={toggleMenu}>New Role</Link></li>

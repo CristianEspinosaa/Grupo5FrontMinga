@@ -41,7 +41,7 @@ const Carousel = () => {
     };
 
     return (
-        <div className="container mx-auto px-12 py-8 relative mt-10 bg-gradient-to-r from-[#4436cb] to-[#5d51f2] rounded-md p-6 my-6 shadow-xl h-[280px] hidden md:block">
+        <div className="container mx-auto px-12 py-9 relative mt-8 bg-gradient-to-r from-[#4436cb] to-[#5d51f2] rounded-md p-6 my-6 shadow-xl h-[200px] hidden md:block">
             {/* Contenido de la diapositiva */}
             <div className="flex items-center justify-center space-x-6 translate-y-[-80px]">
                 {/* Botón anterior */}
@@ -70,7 +70,7 @@ const Carousel = () => {
                             <img
                                 src={slidesData[currentSlide].personaje}
                                 alt={`Personaje ${slidesData[currentSlide].titulo}`}
-                                className="w-62 h-auto "
+                                className="w-34 h-auto "
                             />
 
                         </div>
@@ -87,9 +87,9 @@ const Carousel = () => {
 
                     </div>
 
-                    <div className="w-full  translate-y-[30px]">
+                    <div className="w-full  translate-y-[20px]">
                         <div className="text-white px-12 ">
-                            <h3 className="text-2xl font-bold mb-4">
+                            <h3 className="text-xl font-bold mb-4">
                                 {slidesData[currentSlide].titulo}
                             </h3>
                             <p className="text-sm leading-relaxed">

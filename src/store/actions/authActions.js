@@ -48,6 +48,7 @@ export const logout = () => (dispatch) => {
       );
     }
     removeAuthToken();
+    removeUserData();
     dispatch({ type: LOGOUT });
   } catch (error) {
     console.error('Error durante el logout:', error);
@@ -56,3 +57,4 @@ export const logout = () => (dispatch) => {
 
 const setAuthToken = (token) => localStorage.setItem('token', token);
 const removeAuthToken = () => localStorage.removeItem('token');
+const removeUserData = () => localStorage.removeItem('userId');

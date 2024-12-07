@@ -8,16 +8,17 @@ import img3 from '../assets/author-3.png';
 import img4 from '../assets/company-1.png';
 import img5 from '../assets/company-2.png';
 import img6 from '../assets/company-3.png';
-import icon1 from '../assets/img/icon.png';
 
 const NewRole = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const navigate = useNavigate(); // Crear la instancia de navigate
 
   const handleSelectRole = (role) => {
-    setSelectedRole(role === selectedRole ? null : role);
+    setSelectedRole(role);
     if (role === 1) {
-      navigate('/pages/editAuthor'); // Redirigir a /pages/editAuthor al seleccionar Autor
+      navigate('/createauthor'); // Redirige a la página de edición de autor
+    } else if (role === 2) {
+      navigate('/createcompany'); // Redirige a la página de edición de empresa (opcional)
     }
   };
 
