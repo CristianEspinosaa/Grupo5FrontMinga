@@ -1,13 +1,14 @@
 import React from "react";
-import img1 from '../assets/Rectangle10.png';
+
+import img1 from '../src/assets/Rectangle10.png'
 import fondo1 from '../assets/Rectangle606.png';
 import location from '../assets/location-marker.png';
 import icon1 from '../assets/icon.png';
+import backgroundImage from '../assets/Rectangle10.jpeg';
 
 const EditAuthor = () => {
     return (
         <div className="relative">
-
             <div>
                 <img src={fondo1} alt="fondo" className="hidden lg:block w-full h-2/3 object-cover" />
                 <h1 className="hidden absolute inset-0 lg:flex pb-40 items-center justify-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-semibold">
