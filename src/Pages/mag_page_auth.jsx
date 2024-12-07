@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import backgroundImage from '../assets/foto_manga.jpeg';
 
-const MangasPage = () => {
+const MangaPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -383,4 +383,4 @@ return (
 );
 };
 
-export default MangasPage;
+export default MangaPage;
