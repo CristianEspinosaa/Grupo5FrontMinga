@@ -310,7 +310,9 @@ return (
     <div 
       className="fixed top-0 left-0 w-full h-[70vh] bg-cover bg-center z-0" 
       style={{ backgroundImage: `url(${backgroundImage})` }}
-    />
+    >
+      <div className="" />
+    </div>
     
     {/* Content Layer */}
     <div className="relative z-20">
@@ -351,36 +353,40 @@ return (
             </div>
 
             {/* Manga Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredMangas.map((manga, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[360px] h-[144px] mx-auto md:ml-20"
-                >
-                  <div className={`w-1 h-full self-stretch ${getLineColor(manga.category_id)}`} />
-                  
-                  <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
-                    <h3 className="font-normal text-lg leading-tight truncate">{manga.title}</h3>
-                    <p className="text-sm text-gray-400">Type</p>
-                    <button className="w-16 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
-                      Read
-                    </button>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-[-1rem]">
+  {filteredMangas.map((manga, index) => (
+    <div 
+      key={index} 
+      className="relative flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[280px] h-[144px] mx-auto xl:w-[380px] md:h-[200px] md:ml-20"
+    >
+      <div 
+        className={`absolute left-0 top-0 bottom-0 w-1 ${getLineColor(manga.category_id)}`} 
+      />
+      
+      <div className="flex flex-col gap-1 p-3 pl-4 rounded-l-[2rem] w-[160px] md:w-[200px]">
+        <h3 className="font-normal text-lg leading-tight truncate md:truncate-none">{manga.title}</h3>
+        <p className="text-sm text-gray-400 truncate">
+          {manga.category_id.charAt(0).toUpperCase() + manga.category_id.slice(1)}
+        </p>
+        <button className="w-16 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
+          Read
+        </button>
+      </div>
 
-                  <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
-                    <img 
-                      src={manga.cover_photo}
-                      alt={manga.title}
-                      className="w-full h-full object-cover rounded-l-full rounded-r-lg"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/api/placeholder/200/200';
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto md:w-[200px] md:h-[200px]">
+        <img 
+          src={manga.cover_photo}
+          alt={manga.title}
+          className="w-full h-full object-cover rounded-l-full rounded-r-lg"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/api/placeholder/200/200';
+          }}
+        />
+      </div>
+    </div>
+  ))}
+</div>
           </div>
         </div>
       </div>
@@ -390,6 +396,6 @@ return (
     <div className="h-32 bg-gray-50"></div>
   </div>
 );
-};
+}
 
 export default MangasPage;
