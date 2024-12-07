@@ -305,16 +305,18 @@ const filteredMangas = useMemo(() => {
 }, [searchTerm, selectedCategory]);
 
 return (
-  <div className="min-h-[30vh] bg-white">
-    {/* Hero Section with Background */}
+  <div className="min-h-[30vh] bg-white relative">
+    {/* Background Image Container */}
     <div 
-      className="relative min-h-[70vh] bg-cover bg-top" 
+      className="fixed top-0 left-0 w-full h-[70vh] bg-cover bg-center z-0" 
       style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <div className="absolute inset-0 bg-black/40" />
-      
-      <div className="relative z-10 pt-16 pb-28">
+    />
+    
+    {/* Content Layer */}
+    <div className="relative z-20">
+      <div className="pt-16 pb-28">
         <div className="max-w-6xl mx-auto px-4 mt-40">
+          {/* Search Section */}
           <h1 className="text-4xl font-bold text-center text-white mb-6">Mangas</h1>
           <div className="max-w-md mx-auto mb-8">
             <div className="relative">
@@ -330,7 +332,7 @@ return (
           </div>
 
           {/* Main Content Container */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg -mb-32 mt-36">
+          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg -mb-32 mt-34">
             {/* Categories */}
             <div className="flex flex-wrap gap-1.5 mb-6 ml-4 md:ml-20 justify-center md:justify-start">
               {categories.map(category => (
@@ -349,37 +351,34 @@ return (
             </div>
 
             {/* Manga Grid */}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  {filteredMangas.map((manga, index) => (
-    <div 
-      key={index} 
-      className="flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[360px] h-[144px] mx-auto md:ml-20"
-    >
-      {/* Category Indicator Line */}
-      <div className={`w-1 h-full self-stretch ${getLineColor(manga.category_id)}`}></div>
-      
-      {/* Left side - Info */}
-      <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
-        <h3 className="font-normal text-lg leading-tight truncate">{manga.title}</h3>
-        <p className="text-sm text-gray-400">Type</p>
-        <button className="w-16 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
-          Read
-        </button>
-      </div>
-    
-      {/* Right side - Image */}
-      <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
-        <img 
-          src={manga.cover_photo}
-          alt={manga.title}
-          className="w-full h-full object-cover rounded-l-full rounded-r-lg" 
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = '/api/placeholder/200/200';
-          }}
-        />
-      </div>
-    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredMangas.map((manga, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[360px] h-[144px] mx-auto md:ml-20"
+                >
+                  <div className={`w-1 h-full self-stretch ${getLineColor(manga.category_id)}`} />
+                  
+                  <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
+                    <h3 className="font-normal text-lg leading-tight truncate">{manga.title}</h3>
+                    <p className="text-sm text-gray-400">Type</p>
+                    <button className="w-16 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
+                      Read
+                    </button>
+                  </div>
+
+                  <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
+                    <img 
+                      src={manga.cover_photo}
+                      alt={manga.title}
+                      className="w-full h-full object-cover rounded-l-full rounded-r-lg"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/api/placeholder/200/200';
+                      }}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </div>
