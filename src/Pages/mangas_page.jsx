@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import backgroundImage from '../assets/mangaspage_read.jpeg';
+import backgroundImage from '../assets/mujer_leyendo.jpeg';
 
 const MangasPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -298,106 +298,97 @@ const MangasPage = () => {
 
 const filteredMangas = useMemo(() => {
   return mangas.filter(manga => {
-    const matchesSearch = manga.title.toLowerCase().startsWith(searchTerm.toLowerCase());
+    const matchesSearch = manga.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || manga.category_id === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 }, [searchTerm, selectedCategory]);
 
 return (
-  <div className="min-h-screen bg-gray-100">
-    {/* Hero Section */}
+  <div className="min-h-[30vh] bg-white">
+    {/* Hero Section with Background */}
     <div 
-      className="min-h-[50vh] bg-cover relative"
-      style={{ 
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundPosition: 'center 70%'
-      }}
+      className="relative min-h-[70vh] bg-cover bg-top" 
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black/40" />
       
-      <div className="relative max-w-7xl mx-auto space-y-8">
-        {/* Título y Búsqueda */}
-        <div className="text-center text-white space-y-6">
-          <h1 className="text-5xl font-bold">Mangas</h1>
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white/95 rounded-full shadow-lg p-2">
-              <div className="relative flex items-center">
-                <Search className="absolute left-4 text-gray-400" size={24} />
-                <input
-                  type="text"
-                  placeholder="Find your manga here"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full py-3 px-12 rounded-full bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-lg"
-                />
-              </div>
+      <div className="relative z-10 pt-16 pb-28">
+        <div className="max-w-6xl mx-auto px-4 mt-40">
+          <h1 className="text-4xl font-bold text-center text-white mb-6">Mangas</h1>
+          <div className="max-w-md mx-auto mb-8">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Find your manga here"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50"
+              />
             </div>
           </div>
-        </div>
 
-        {/* Contenedor Principal de Categorías y Cards */}
-        <div className="container mx-auto px-4 -mt-10 relative z-10">
-         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6">
-          {/* Categorías */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-1.5 rounded-full text-sm transition-all duration-200 ${
-                  selectedCategory === category.id
-                    ? `${getCategoryStyle(category.id).active} shadow-sm`
-                    : `${getCategoryStyle(category.id).inactive}`
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Grid de Mangas */}
-          {filteredMangas.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-              {filteredMangas.map((manga, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="relative pt-[140%]">
-                    <img 
-                      src={manga.cover_photo} 
-                      alt={manga.title}
-                      className="absolute top-0 left-0 w-full h-full object-cover rounded-t-xl"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/api/placeholder/200/300';
-                      }}
-                    />
-                  </div>
-                  <div className="p-4 space-y-3">
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-1 h-6 ${getLineColor(manga.category_id)} rounded-full`}></div>
-                        <h3 className="font-semibold text-lg">{manga.title}</h3>
-                      </div>
-                      <span className={`text-sm ${getCategoryTextColor(manga.category_id)}`}>
-                        {manga.category_id}
-                      </span>
-                    </div>
-                    <button className="w-20 py-1 px-4 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
-                      Read
-                    </button>
-                  </div>
-                </div>
+          {/* Main Content Container */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg -mb-32 mt-36">
+            {/* Categories */}
+            <div className="flex flex-wrap gap-1.5 mb-6 ml-4 md:ml-20 justify-center md:justify-start">
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-3 py-1 rounded-full text-sm transition-all ${
+                    selectedCategory === category.id
+                      ? `${getCategoryStyle(category.id).active}`
+                      : `${getCategoryStyle(category.id).inactive}`
+                  }`}
+                >
+                  {category.name}
+                </button>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No results found for your search</p>
+
+            {/* Manga Grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {filteredMangas.map((manga, index) => (
+    <div 
+      key={index} 
+      className="flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[360px] h-[144px] mx-auto md:ml-20"
+    >
+      {/* Category Indicator Line */}
+      <div className={`w-1 h-full self-stretch ${getLineColor(manga.category_id)}`}></div>
+      
+      {/* Left side - Info */}
+      <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
+        <h3 className="font-normal text-lg leading-tight truncate">{manga.title}</h3>
+        <p className="text-sm text-gray-400">Type</p>
+        <button className="w-16 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
+          Read
+        </button>
+      </div>
+    
+      {/* Right side - Image */}
+      <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
+        <img 
+          src={manga.cover_photo}
+          alt={manga.title}
+          className="w-full h-full object-cover rounded-l-full rounded-r-lg" 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/api/placeholder/200/200';
+          }}
+        />
+      </div>
+    </div>
+              ))}
             </div>
-          )}
           </div>
         </div>
       </div>
     </div>
+    
+    {/* Spacer for content below hero */}
+    <div className="h-32 bg-gray-50"></div>
   </div>
 );
 };

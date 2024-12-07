@@ -12,6 +12,8 @@ import NotFound from './Pages/NotFound.jsx';
 import DashBoard from './Pages/DashBoard.jsx';
 import './App.css';
 import AdminRoute from "./Components/AdminRoute.jsx";
+import MangasPage from './Pages/Mangas_page.jsx';
+import MangaPage from './Pages/Manga_page_auth.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
       { path: "/register", element: <SignRoute><Register /></SignRoute> },
       { path: "/login", element: <SignRoute><Login /></SignRoute> },
       { path: "/dashboard", element: <AdminRoute><DashBoard /></AdminRoute> },
+      { path: "/mangas", element: <MangasPage /> },
+      { path: "/manga", element: <MangaPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },
