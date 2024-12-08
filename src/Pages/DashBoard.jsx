@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { Search, Users, Building2, MapPin, ToggleLeft, ToggleRight } from 'lucide-react';
+import {  User, Users, MapPin, ToggleLeft, ToggleRight } from 'lucide-react';
 import backgroundImage from '../assets/junta_de_trabajo.jpeg';
 
 const AdminPanel = () => {
@@ -74,6 +74,16 @@ const AdminPanel = () => {
 
   const getAuthorColor = (color) => authorColors[color] || 'bg-gray-500';
 
+  const getTeamColor = (teamName) => {
+    const colors = {
+      'Blue Team': 'bg-blue-500',
+      'Red Team': 'bg-red-500',
+      'Orange Team': 'bg-orange-500',
+      'Purple Team': 'bg-purple-500'
+    };
+    return colors[teamName] || 'bg-gray-500';
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
@@ -138,31 +148,117 @@ const AdminPanel = () => {
       </div>
 
       {/* Panel Container */}
-      <div className="mx-auto px-8 -mt-20 relative z-10">
+      <div className="mx-auto px-8 -mt-20 relative z-10 max-w-4xl">
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6">
+          {/* Title */}
+          <h2 className="text-center text-xl font-semibold mb-2">Entities</h2>
+          
+          {/* Purple line under Entities */}
+          <div className="w-16 h-1 bg-indigo-600 mx-auto mb-6"></div>
+
           {/* Tabs */}
-          <div>Entities</div>
-          <div className='bg-indigo-600'></div>
-          <div className="flex justify-center mb-6">
-            <div className="border-b border-gray-200 w-full">
-              <nav className="-mb-px flex space-x-8">
-                <button onClick={() => { setActiveTab('companies'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'companies' ? 'border-gray-500 text-white-600 bg-indigo-600' : 'border-transparent text-indigo-600 hover:text-indigo-600 hover:border-indigo-300'}`}>
-                  Companies
-                </button>
-                <button onClick={() => { setActiveTab('authors'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'authors' ? 'border-gray-500 text-white-600 bg-indigo-600' : 'border-transparent text-indigo-600 hover:text-indigo-600 hover:border-indigo-300'}`}>
-                  Authors
-                </button>
-              </nav>
-            </div>
+          <div className="flex space-x-4 mb-6 border-b border-gray-200">
+            <button 
+              onClick={() => setActiveTab('companies')} 
+              className={`flex-1 py-2 text-sm font-medium ${
+                activeTab === 'companies' 
+                  ? 'bg-indigo-600 text-white rounded-t-lg' 
+                  : 'text-gray-600'
+              }`}
+            >
+              Companies
+            </button>
+            <button 
+              onClick={() => setActiveTab('authors')} 
+              className={`flex-1 py-2 text-sm font-medium ${
+                activeTab === 'authors' 
+                  ? 'bg-indigo-600 text-white rounded-t-lg' 
+                  : 'text-gray-600'
+              }`}
+            >
+              Authors
+            </button>
           </div>
 
           {/* Table */}
           <div className="overflow-x-auto">
-            <table className="min-w-full">
-              <tbody>
-                {(activeTab === 'companies' ? filteredCompanies : filteredAuthors).map((item) => (
-                  <TableRow key={item._id} item={item} type={activeTab} />
-                ))}
+            <table className="w-full">
+              <tbody className="divide-y divide-gray-200">
+                {activeTab === 'companies' ? (
+                  // Companies table rows
+                  companies.map((company) => (
+                    <tr key={company._id} className="text-sm">
+                      <td className="py-3 pl-4">
+                        <div className="flex items-center">
+                          <div className="flex items-center gap-2">
+                            <Users className={`h-5 w-5 ${getTeamColor(company.team)} text-white rounded-sm p-1`} />
+                            <span>{company.name}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 text-gray-500">{company.website}</td>
+                      <td className="py-3">
+                        <div className="flex justify-start ml-10">
+                          <img 
+                            src={company.photo || "/api/placeholder/40/40"} 
+                            alt={company.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                          />
+                        </div>
+                      </td>
+                      <td className="py-3 pr-4">
+                        <button onClick={() => toggleStatus(company._id, 'companies')} className="ml-auto">
+                          {company.active ? (
+                            <ToggleRight className="h-6 w-6 text-indigo-600" />
+                          ) : (
+                            <ToggleLeft className="h-6 w-6 text-gray-400" />
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  // Authors table rows
+                  authors.map((author) => (
+                    <tr key={author._id} className="text-sm">
+                      <td className="py-3 pl-4">
+                        <div className="flex items-center">
+                          <div className="flex items-center gap-2">
+                            <User className={`h-5 w-5 ${getAuthorColor(author.color)} text-white rounded-sm p-1`} />
+                            <span>{author.name}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 text-gray-500">
+                        {formatDate(author.date)}
+                      </td>
+                      <td className="py-3">
+                        <div className="flex items-center text-gray-500">
+                          <MapPin className="h-4 w-4 mr-1" />
+                          {author.city}
+                        </div>
+                      </td>
+                      <td className="py-3">
+                        <div className="flex justify-center">
+                          <img 
+                            src={author.photo || "/api/placeholder/40/40"} 
+                            alt={author.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                          />
+                        </div>
+                      </td>
+                      <td className="py-3 pr-4">
+                        <button onClick={() => toggleStatus(author._id, 'authors')} className="ml-auto">
+                          {author.active ? (
+                            <ToggleRight className="h-6 w-6 text-indigo-600" />
+                          ) : (
+                            <ToggleLeft className="h-6 w-6 text-gray-400" />
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
