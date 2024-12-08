@@ -1,10 +1,14 @@
 import axios from 'axios';
 
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const SET_USER = 'SET_USER';
 export const LOGOUT = 'LOGOUT';
+export const VALIDATE_TOKEN = 'VALIDATE_TOKEN';
 
 const handleApiRequest = async (formData) => {
   try {
@@ -33,9 +37,16 @@ export const login = (formData) => async (dispatch) => {
 };
 
 export const setUser = (userData) => {
-  setAuthToken(userData.token);
+  if (userData?.token) {
+    setAuthToken(userData.token);
+  }
   return { type: SET_USER, payload: userData };
 };
+
+export const validateToken = (token) => ({
+  type: 'VALIDATE_TOKEN',
+  payload: token
+});
 
 export const logout = () => (dispatch) => {
   try {
@@ -56,3 +67,4 @@ export const logout = () => (dispatch) => {
 
 const setAuthToken = (token) => localStorage.setItem('token', token);
 const removeAuthToken = () => localStorage.removeItem('token');
+

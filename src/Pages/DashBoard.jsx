@@ -121,7 +121,7 @@ const AdminPanel = () => {
       )}
       <td className="px-6 py-4 whitespace-nowrap">
         <button onClick={() => toggleStatus(item._id, type)} className="text-gray-400 hover:text-gray-500 transition-colors duration-200">
-          {item.active ? <ToggleRight className="h-6 w-6 text-green-500" /> : <ToggleLeft className="h-6 w-6" />}
+          {item.active ? <ToggleRight className="h-6 w-6 text-blue-500" /> : <ToggleLeft className="h-6 w-6" />}
         </button>
       </td>
     </tr>
@@ -138,58 +138,27 @@ const AdminPanel = () => {
       </div>
 
       {/* Panel Container */}
-      <div className="mx-auto px-8 -mt-10 relative z-10">
+      <div className="mx-auto px-8 -mt-20 relative z-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6">
           {/* Tabs */}
+          <div>Entities</div>
+          <div className='bg-indigo-600'></div>
           <div className="flex justify-center mb-6">
             <div className="border-b border-gray-200 w-full">
               <nav className="-mb-px flex space-x-8">
-                <button onClick={() => { setActiveTab('companies'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'companies' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                <button onClick={() => { setActiveTab('companies'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'companies' ? 'border-gray-500 text-white-600 bg-indigo-600' : 'border-transparent text-indigo-600 hover:text-indigo-600 hover:border-indigo-300'}`}>
                   Companies
                 </button>
-                <button onClick={() => { setActiveTab('authors'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'authors' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                <button onClick={() => { setActiveTab('authors'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'authors' ? 'border-gray-500 text-white-600 bg-indigo-600' : 'border-transparent text-indigo-600 hover:text-indigo-600 hover:border-indigo-300'}`}>
                   Authors
                 </button>
               </nav>
             </div>
           </div>
 
-          {/* Search Bar */}
-          <div className="mb-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder={`Search ${activeTab === 'companies' ? 'companies' : 'authors'}...`}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="min-w-full">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  {activeTab === 'companies' ? (
-                    <>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Company</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Website</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Authors</th>
-                    </>
-                  ) : (
-                    <>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Author</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Birthdate</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">City</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Avatar</th>
-                    </>
-                  )}
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Status</th>
-                </tr>
-              </thead>
               <tbody>
                 {(activeTab === 'companies' ? filteredCompanies : filteredAuthors).map((item) => (
                   <TableRow key={item._id} item={item} type={activeTab} />
