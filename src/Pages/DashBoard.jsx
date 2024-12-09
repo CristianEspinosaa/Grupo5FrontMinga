@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { Search, Users, Building2, MapPin, ToggleLeft, ToggleRight } from 'lucide-react';
+import {  User, Users, MapPin, ToggleLeft, ToggleRight } from 'lucide-react';
 import backgroundImage from '../assets/junta_de_trabajo.jpeg';
 
 const AdminPanel = () => {
@@ -74,6 +74,16 @@ const AdminPanel = () => {
 
   const getAuthorColor = (color) => authorColors[color] || 'bg-gray-500';
 
+  const getTeamColor = (teamName) => {
+    const colors = {
+      'Blue Team': 'bg-blue-500',
+      'Red Team': 'bg-red-500',
+      'Orange Team': 'bg-orange-500',
+      'Purple Team': 'bg-purple-500'
+    };
+    return colors[teamName] || 'bg-gray-500';
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
@@ -121,7 +131,7 @@ const AdminPanel = () => {
       )}
       <td className="px-6 py-4 whitespace-nowrap">
         <button onClick={() => toggleStatus(item._id, type)} className="text-gray-400 hover:text-gray-500 transition-colors duration-200">
-          {item.active ? <ToggleRight className="h-6 w-6 text-green-500" /> : <ToggleLeft className="h-6 w-6" />}
+          {item.active ? <ToggleRight className="h-6 w-6 text-blue-500" /> : <ToggleLeft className="h-6 w-6" />}
         </button>
       </td>
     </tr>
@@ -138,62 +148,117 @@ const AdminPanel = () => {
       </div>
 
       {/* Panel Container */}
-      <div className="mx-auto px-8 -mt-10 relative z-10">
+      <div className="mx-auto px-8 -mt-20 relative z-10 max-w-4xl">
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6">
-          {/* Tabs */}
-          <div className="flex justify-center mb-6">
-            <div className="border-b border-gray-200 w-full">
-              <nav className="-mb-px flex space-x-8">
-                <button onClick={() => { setActiveTab('companies'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'companies' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
-                  Companies
-                </button>
-                <button onClick={() => { setActiveTab('authors'); setSearchTerm(''); }} className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'authors' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
-                  Authors
-                </button>
-              </nav>
-            </div>
-          </div>
+          {/* Title */}
+          <h2 className="text-center text-xl font-semibold mb-2">Entities</h2>
+          
+          {/* Purple line under Entities */}
+          <div className="w-16 h-1 bg-indigo-600 mx-auto mb-6"></div>
 
-          {/* Search Bar */}
-          <div className="mb-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder={`Search ${activeTab === 'companies' ? 'companies' : 'authors'}...`}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+          {/* Tabs */}
+          <div className="flex space-x-4 mb-6 border-b border-gray-200">
+            <button 
+              onClick={() => setActiveTab('companies')} 
+              className={`flex-1 py-2 text-sm font-medium ${
+                activeTab === 'companies' 
+                  ? 'bg-indigo-600 text-white rounded-t-lg' 
+                  : 'text-gray-600'
+              }`}
+            >
+              Companies
+            </button>
+            <button 
+              onClick={() => setActiveTab('authors')} 
+              className={`flex-1 py-2 text-sm font-medium ${
+                activeTab === 'authors' 
+                  ? 'bg-indigo-600 text-white rounded-t-lg' 
+                  : 'text-gray-600'
+              }`}
+            >
+              Authors
+            </button>
           </div>
 
           {/* Table */}
           <div className="overflow-x-auto">
-            <table className="min-w-full">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  {activeTab === 'companies' ? (
-                    <>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Company</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Website</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Authors</th>
-                    </>
-                  ) : (
-                    <>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Author</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Birthdate</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">City</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Avatar</th>
-                    </>
-                  )}
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider bg-indigo-600">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(activeTab === 'companies' ? filteredCompanies : filteredAuthors).map((item) => (
-                  <TableRow key={item._id} item={item} type={activeTab} />
-                ))}
+            <table className="w-full">
+              <tbody className="divide-y divide-gray-200">
+                {activeTab === 'companies' ? (
+                  // Companies table rows
+                  companies.map((company) => (
+                    <tr key={company._id} className="text-sm">
+                      <td className="py-3 pl-4">
+                        <div className="flex items-center">
+                          <div className="flex items-center gap-2">
+                            <Users className={`h-5 w-5 ${getTeamColor(company.team)} text-white rounded-sm p-1`} />
+                            <span>{company.name}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 text-gray-500">{company.website}</td>
+                      <td className="py-3">
+                        <div className="flex justify-start ml-10">
+                          <img 
+                            src={company.photo || "/api/placeholder/40/40"} 
+                            alt={company.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                          />
+                        </div>
+                      </td>
+                      <td className="py-3 pr-4">
+                        <button onClick={() => toggleStatus(company._id, 'companies')} className="ml-auto">
+                          {company.active ? (
+                            <ToggleRight className="h-6 w-6 text-indigo-600" />
+                          ) : (
+                            <ToggleLeft className="h-6 w-6 text-gray-400" />
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  // Authors table rows
+                  authors.map((author) => (
+                    <tr key={author._id} className="text-sm">
+                      <td className="py-3 pl-4">
+                        <div className="flex items-center">
+                          <div className="flex items-center gap-2">
+                            <User className={`h-5 w-5 ${getAuthorColor(author.color)} text-white rounded-sm p-1`} />
+                            <span>{author.name}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 text-gray-500">
+                        {formatDate(author.date)}
+                      </td>
+                      <td className="py-3">
+                        <div className="flex items-center text-gray-500">
+                          <MapPin className="h-4 w-4 mr-1" />
+                          {author.city}
+                        </div>
+                      </td>
+                      <td className="py-3">
+                        <div className="flex justify-center">
+                          <img 
+                            src={author.photo || "/api/placeholder/40/40"} 
+                            alt={author.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                          />
+                        </div>
+                      </td>
+                      <td className="py-3 pr-4">
+                        <button onClick={() => toggleStatus(author._id, 'authors')} className="ml-auto">
+                          {author.active ? (
+                            <ToggleRight className="h-6 w-6 text-indigo-600" />
+                          ) : (
+                            <ToggleLeft className="h-6 w-6 text-gray-400" />
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

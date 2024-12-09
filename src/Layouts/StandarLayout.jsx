@@ -10,7 +10,8 @@ export default function StandarLayout() {
       <main>
         <Outlet></Outlet>
       </main>      
-      <ScrollToTop /> 
+      <ScrollToTop />
+      <Footer />     
     </>
   );
 }
