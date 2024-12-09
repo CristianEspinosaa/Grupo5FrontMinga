@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import actions from "./actions"
+import actions from "../actions/modalActions"
 
 const initialState = {
   isOpen: false,
