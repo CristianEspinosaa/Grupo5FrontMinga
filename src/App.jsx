@@ -11,6 +11,17 @@ import Register from './Pages/Register.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import DashBoard from './Pages/DashBoard.jsx';
 import AdminRoute from "./Components/AdminRoute.jsx";
+import Mangas from './Pages/Mangas.jsx';
+import MangasAuth from './Pages/MangasAuth.jsx';
+import NewRole from './Pages/NewRole.jsx';
+import PrivateRoute from './Components/PrivateRoute.jsx';
+import CreateAuthor from './Pages/CreateAuthor.jsx';
+import CreateCompany from './Pages/CreateCompany.jsx';
+import CreateManga from './Pages/CreateManga.jsx';
+import CreateChapter from './Pages/CreateChapter.jsx';
+import EditAuthor from './Pages/Profile.jsx';
+import EditChapter from './Pages/EditChapter.jsx';
+import AuthorCompanyRoute from './Components/AuthorComanyRoute.jsx';
 
 const router = createBrowserRouter([
   {
