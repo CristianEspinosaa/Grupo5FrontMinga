@@ -86,7 +86,6 @@ const EditAuthor = () => {
 
         try {
             if (authorData._id) {
-                // Actualizar un autor existente
                 const response = await axios.put(
                     `http://localhost:8080/api/authors/update/${authorData._id}`,
                     updatedData,
@@ -94,16 +93,14 @@ const EditAuthor = () => {
                 );
                 toast.success(response.data.message || "Author details updated successfully.");
             } else {
-                // Crear un nuevo autor
                 const userId = localStorage.getItem("userId");
-                const newAuthorData = { ...updatedData, user_id: userId }; // Asegúrate de enviar el `user_id` al backend
+                const newAuthorData = { ...updatedData, user_id: userId };
                 const response = await axios.post(
                     `http://localhost:8080/api/authors/create`,
                     newAuthorData,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 toast.success(response.data.message || "Author created successfully.");
-                // Actualiza el state con los datos del nuevo autor
                 setAuthorData({ ...response.data.response, formattedDate: formatDate(response.data.response.date) });
             }
         } catch (error) {
@@ -111,7 +108,6 @@ const EditAuthor = () => {
             toast.error("Failed to save author details.");
         }
     };
-
 
     const handleDelete = async () => {
         const confirmDelete = window.confirm(
@@ -125,7 +121,6 @@ const EditAuthor = () => {
                 `http://localhost:8080/api/authors/delete/${authorData._id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-
             toast.success(response.data.message || "Account deleted successfully.");
             navigate("/");
         } catch (error) {
@@ -136,14 +131,14 @@ const EditAuthor = () => {
 
     return (
         <div className="relative">
-            <div>
-                <img src={fondo1} alt="fondo" className="hidden lg:block w-full h-2/3 object-cover" />
-                <h1 className="hidden absolute inset-0 lg:flex pb-40 items-center justify-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-semibold">
-                    Profile
-                </h1>
+            <div className="hidden sm:block h-[60vh] bg-cover relative px-8" style={{ backgroundImage: `url(${fondo1})`, backgroundPosition: 'center' }}>
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="relative h-full flex items-center justify-center">
+                    <h1 className="text-4xl font-bold text-white">Profile</h1>
+                </div>
             </div>
-            <div className="fixed flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around rounded-2xl bottom-0 left-1/2 transform -translate-x-1/2 w-[90%] lg:w-[70%] h-[90vh] lg:h-[60vh] bg-white z-10 shadow-lg">
-                <div className="flex flex-col items-center p-6 rounded-lg w-full lg:w-64">
+            <div className="relative bg-white/90 backdrop-blur-sm flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around lg:-mt-10 lg:my-10 lg:rounded-3xl bottom-0 left-1/2 transform -translate-x-1/2 w-screen h-screen lg:w-[80%] lg:h-[60vh] shadow-lg z-10">
+                <div className="p-6">
                     <img
                         src={authorData.photo || img1}
                         alt="User Profile"
@@ -214,14 +209,14 @@ const EditAuthor = () => {
                     />
                     <button
                         type="submit"
-                        className="w-full h-10 p-2 mb-4 font-semibold text-white text-2xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
+                        className="w-full h-10 p-1 mb-4 font-semibold text-white text-2xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
                     >
                         Save
                     </button>
                     <button
                         type="button"
                         onClick={handleDelete}
-                        className="w-full h-10 p-2 text-[#EE8380] font-semibold text-2xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
+                        className="w-full h-10 p-1 text-[#EE8380] font-semibold text-2xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
                     >
                         Delete
                     </button>
