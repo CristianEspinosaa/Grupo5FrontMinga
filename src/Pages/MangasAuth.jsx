@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { readCategories } from "../store/actions/categoriesActions";
 import { readMangasByAuthor } from "../store/actions/mangasActions";
 import axios from "axios";
-import backgroundImage from "../assets/FondoManga2.jpeg";
+import backgroundImage from "../assets/manga-read.jpg";
 
 const MangasAuth = () => {
   const dispatch = useDispatch();

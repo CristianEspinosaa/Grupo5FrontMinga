@@ -32,7 +32,7 @@ const Navbar = () => {
       </nav>
 
       {isOpen && (
-        <div className="fixed top-0 left-0 lg:w-1/3 w-full h-full bg-gradient-to-r from-[#4436cb] to-[#5d51f2] z-40">          
+        <div className="fixed top-0 left-0 lg:w-1/3 w-full h-full bg-gradient-to-r from-[#4436cb] to-[#5d51f2] z-40">
           <button className="absolute top-4 right-4" onClick={toggleMenu}>
             <img src={union} alt="Close Menu" className="h-4 w-4" />
           </button>
@@ -40,25 +40,29 @@ const Navbar = () => {
             <div className="flex items-center mb-6">
               <img src={user?.photo || UserImage} alt="User" className="h-10 w-10 rounded-full" />
               <div className="ml-4 text-white">
-                <p className="font-bold">Welcome,</p>                
+                <p className="font-bold">Welcome,</p>
                 <p className="text-sm">{user?.email || 'User Email'}</p>
               </div>
             </div>
             <ul className="space-y-4">
               <li><Link to="/" className="text-white text-lg" onClick={toggleMenu}>Home</Link></li>
               {token && (
+
                 <>
+                  <li><Link to="/profile" className="text-white text-lg" onClick={toggleMenu}>Profile</Link></li>
+                  <li><Link to="/newrole" className="text-white text-lg" onClick={toggleMenu}>New Role</Link></li>
                   {user?.role === 3 && (
                     <li><Link to="/dashboard" className="text-white text-lg" onClick={toggleMenu}>Dashboard</Link></li>
                   )}
                   {user?.role === 0 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>User</Link></li>
+                    <li><Link to="/mangas" className="text-white text-lg" onClick={toggleMenu}>Mangas</Link></li>
                   )}
                   {(user?.role === 1 || user?.role === 2) && (
-                    <li><Link to="/createmanga" className="text-white text-lg" onClick={toggleMenu}>Create Manga</Link></li>
+                    <>
+                      <li><Link to="/createmanga" className="text-white text-lg" onClick={toggleMenu}>Create Manga</Link></li>
+                      <li><Link to="/mangas-manager" className="text-white text-lg" onClick={toggleMenu}>My Mangas</Link></li>
+                    </>
                   )}
-                  <li><Link to="/profile" className="text-white text-lg" onClick={toggleMenu}>Profile</Link></li>
-                  <li><Link to="/newrole" className="text-white text-lg" onClick={toggleMenu}>New Role</Link></li>
                   <li><button onClick={handleLogout} className="text-white text-lg w-full text-left">Logout</button></li>
                 </>
               )}
