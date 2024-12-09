@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { setUser } from "../store/actions/authActions";
 import Hero from "../Components/Hero";
 import Carousel from "../Components/Carousel";
-import './Home.css'
 
 const loginWithToken = async (token) => {
   try {
@@ -47,7 +46,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />    
+      <Hero />
       <Carousel />
     </>
   );
