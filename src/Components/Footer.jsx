@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import footerImg from "../assets/footer.png";
+import ModalDonate from '../Components/ModalDonate'
+import { useDispatch, useSelector } from 'react-redux'
+import modaleActions from '../store/actions/modalActions'
 
-// Importación de Font Awesome
+const { openModal, closeModal } = modaleActions;
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -13,6 +17,17 @@ import {
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Footer = () => {
+  const modalName = 'modalDonate';
+  const dispatch = useDispatch();
+  const isOpen = useSelector(store => store.modal.isOpen);
+
+  const handleOpenModal = () => {
+    dispatch(openModal({ modalName }));
+  };
+  function handleCloseModal() {
+    dispatch(closeModal());
+  }
+
   return (
     <footer className="bg-white text-white pb-8">
       <div className="relative w-full">
@@ -102,11 +117,12 @@ const Footer = () => {
 
           {/* Botón Donate */}
           <div className="w-100">
-            <button className="bg-gradient-to-r from-[#4436cb] to-[#5d51f2] text-white py-2 px-10 rounded-full hover:opacity-90 transition flex items-center space-x-2">
+            <button onClick={handleOpenModal} className="bg-gradient-to-r from-[#4436cb] to-[#5d51f2] text-white py-2 px-10 rounded-full hover:opacity-90 transition flex items-center space-x-2">
               <span>Donate</span>
               <FontAwesomeIcon icon={faHeart} />
             </button>
           </div>
+          <ModalDonate isOpen={isOpen} onCloseModal={handleCloseModal} />
         </div>
       </div>
     </footer>
