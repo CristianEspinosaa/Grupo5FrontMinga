@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../store/actions/authActions";
 import Hero from "../Components/Hero";
-import Slider from "../Components/Slider/Slider";
-import './Home.css'
+import Carousel from "../Components/Carousel";
 
 const loginWithToken = async (token) => {
   try {
@@ -48,7 +47,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Slider />
+      <Carousel />
     </>
   );
 }

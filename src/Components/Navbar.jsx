@@ -45,29 +45,28 @@ const Navbar = () => {
               </div>
             </div>
             <ul className="space-y-4">
-              <li><Link to="/" className="text-white text-lg" onClick={toggleMenu}>Home</Link></li>
+              <li><Link to="/" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Home</Link></li>
               {token && (
                 <>
+                  <li><Link to="/profile" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Profile</Link></li>
+                  <li><Link to="/newrole" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>New Role</Link></li>
                   {user?.role === 3 && (
-                    <li><Link to="/dashboard" className="text-white text-lg" onClick={toggleMenu}>Dashboard</Link></li>
+                    <li><Link to="/dashboard" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Dashboard</Link></li>
                   )}
-                  {user?.role === 0 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>User</Link></li>
-                  )}
-                  {user?.role === 1 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>Author</Link></li>
-                  )}
-                  {user?.role === 2 && (
-                    <li><Link to="/user" className="text-white text-lg" onClick={toggleMenu}>Company</Link></li>
-                  )}
-                  <li><Link to="/profile" className="text-white text-lg" onClick={toggleMenu}>Profile</Link></li>
-                  <li><button onClick={handleLogout} className="text-white text-lg w-full text-left">Logout</button></li>
+                  <li><Link to="/mangas" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Mangas</Link></li>
+                  {(user?.role === 1 || user?.role === 2) && (
+                    <>
+                      <li><Link to="/createmanga" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Create Manga</Link></li>
+                      <li><Link to="/mangas-manager" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>My Mangas</Link></li>
+                    </>
+                  )}                  
+                  <li><button onClick={handleLogout} className="text-white text-lg p-2 rounded-md w-full text-left hover:text-blue-600 hover: hover:bg-white">Logout</button></li>
                 </>
               )}
               {!token && (
                 <>
-                  <li><Link to="/login" className="text-white text-lg" onClick={toggleMenu}>Login</Link></li>
-                  <li><Link to="/register" className="text-white text-lg" onClick={toggleMenu}>Register</Link></li>
+                  <li><Link to="/login" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Login</Link></li>
+                  <li><Link to="/register" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Register</Link></li>
                 </>
               )}
             </ul>

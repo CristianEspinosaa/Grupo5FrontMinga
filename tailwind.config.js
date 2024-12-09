@@ -13,5 +13,12 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [function ({ addUtilities }) {
+    addUtilities({
+      '.rounded-b-half': {
+        clipPath: 'ellipse(65% 100% at 50% 0%)',
+      },
+    })
+  },
+  ],
 }
