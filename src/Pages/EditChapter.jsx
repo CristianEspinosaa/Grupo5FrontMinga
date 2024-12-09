@@ -14,7 +14,7 @@ const EditChapter = () => {
                 </div>
                 <div className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-3/4">
                     <h2 className="text-2xl font-semibold mb-24 text-center">Edit Chapter</h2>
-                    <form className="flex flex-col items-center w-full">
+                    <form className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-full">
                         <input
                             type="text"
                             name="nameOfManga"
@@ -57,7 +57,6 @@ const EditChapter = () => {
                         </button>
                     </form>
                 </div>
-
             </div>
         </div>
     );

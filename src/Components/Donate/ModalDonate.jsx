@@ -17,8 +17,8 @@ export default function ModalDonate() {
     let botones = [
         {
             id: 11,
-            title: "Donate $1.000",
-            currency_id: "ARS",
+            title: "Donate $10.000",
+            currency_id: "COP",
             price: 1000,
             image: "https://img.icons8.com/color/1x/keiji-akaashi.png",
             quantity: 1,
@@ -26,8 +26,8 @@ export default function ModalDonate() {
           },
           {
             id: 12,
-            title: "Donate $5.000",
-            currency_id: "ARS",
+            title: "Donate $50.000",
+            currency_id: "COP",
             image: "https://img.icons8.com/color/1x/sailor-moon.png",
             price: 5000,
             quantity: 1,
@@ -35,8 +35,8 @@ export default function ModalDonate() {
           },
           {
             id: 13,
-            title: "Donate $10.000",
-            currency_id: "ARS",
+            title: "Donate $100.000",
+            currency_id: "COP",
             price: 10000,
             image: "https://img.icons8.com/doodle/1x/naruto.png",
             quantity: 1,
@@ -59,7 +59,7 @@ export default function ModalDonate() {
                   id={btn.id}
                   onClick={() => {
                     axios
-                      .post('https://minga-host.onrender.com/payment', btn)
+                      .post('http://localhost:8080/api/payment', btn)
                       .then((res) => (window.location.href = res.data.response.body.init_point));
                   }}
                 >

@@ -202,7 +202,7 @@ const Mangas = () => {
               </button>
             )}
             <p className="mx-4 text-lg">{pageNumber}</p>
-            {filteredMangas.length === 6 || filteredMangas.length === 10 ? (
+            {filteredMangas.length > 1 || filteredMangas.length === 15 ? (
               <button
                 className="bg-[#4739D0] text-white rounded-md py-2 px-4 font-normal shadow-sm border-none hover:bg-[#6560bb] transition-all duration-300 cursor-pointer"
                 onClick={increasePage}

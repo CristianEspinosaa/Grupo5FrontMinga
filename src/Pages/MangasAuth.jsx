@@ -42,7 +42,9 @@ const MangasAuth = () => {
         const author = authorResponse.data.response[0];
         if (author) {
           setAuthorId(author._id);
+          
           console.log("Author ID:", author._id); // Log en consola
+          console.log("Nombre:", author.name); // Log en consola
         } else {
           console.error("No se encontró un autor para este usuario.");
         }
@@ -152,7 +154,7 @@ const MangasAuth = () => {
       >
         <div className="absolute inset-0 bg-black/40">
           <div className="container mx-auto h-full flex flex-col justify-center items-center text-white px-4">
-            <h1 className="text-4xl font-bold mb-8">Mangas</h1>
+            <h1 className="text-4xl font-bold mb-8">My Mangas</h1>
             <div className="w-full max-w-xl">
               <div className="bg-white/95 rounded-full shadow-lg p-2">
                 <div className="relative flex items-center">

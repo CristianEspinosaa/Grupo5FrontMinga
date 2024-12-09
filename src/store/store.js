@@ -4,6 +4,7 @@ import authReducer from './reducers/authReducers';
 import authorReduccer from './reducers/authorReducers';
 import categoriesReducer from './reducers/categoriesReducers';
 import mangasReducer from './reducers/mangasReducers';
+import modalReducer from './reducers/modalReducers';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     author: authorReduccer,
     categories: categoriesReducer,
     mangas: mangasReducer,
+    modal: modalReducer,
   },
 });
 
