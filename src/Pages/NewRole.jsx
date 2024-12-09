@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importar el hook useNavigate
 import rectangle8 from '../assets/Rectangle8.png';
-import logMinga from '../assets/Logomr.png';
+import logMinga from '../assets/log_minga.jpg';
 import img1 from '../assets/author-1.png';
 import img2 from '../assets/author-2.png';
 import img3 from '../assets/author-3.png';
@@ -34,7 +34,7 @@ const NewRole = () => {
             {/* Opción para unirse como Autor */}
             <div
               onClick={() => handleSelectRole(1)}
-              className={`flex items-center justify-between border ${selectedRole === 1 ? 'border-blue-600' : 'border-gray-300'
+              className={`flex items-center justify-between border hover:border-[#4338CA] ${selectedRole === 1 ? 'border-blue-600' : 'border-gray-300'
                 } rounded-md p-3 gap-4 hover:shadow-md cursor-pointer w-full max-w-md`}
             >
               <div className="flex items-center gap-4">
@@ -50,7 +50,9 @@ const NewRole = () => {
               </div>
 
               <div
-                className={`w-6 h-6 flex items-center justify-center rounded-full ${selectedRole === 1 ? 'bg-[#4338CA]' : 'bg-white border-gray-300'
+                className={`w-6 h-6 flex items-center justify-center rounded-full transition-colors ${selectedRole === 1
+                  ? 'bg-[#4338CA]'
+                  : 'bg-white border border-gray-300 hover:bg-[#4338CA]'
                   }`}
               >
                 {selectedRole === 1 ? (
@@ -65,15 +67,25 @@ const NewRole = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 ) : (
-                  <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="white"
+                    className="w-4 h-4 opacity-0 hover:opacity-100"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
                 )}
               </div>
             </div>
 
+
             {/* Opción para unirse como Empresa */}
             <div
               onClick={() => handleSelectRole(2)}
-              className={`flex items-center justify-between border ${selectedRole === 2 ? 'border-[#4338CA]' : 'border-gray-300'
+              className={`flex items-center justify-between border hover:border-[#4338CA] ${selectedRole === 2 ? 'border-[#4338CA]' : 'border-gray-300'
                 } rounded-md p-3 gap-2 hover:shadow-md cursor-pointer`}
             >
               <div className="flex items-center gap-4">
@@ -89,7 +101,9 @@ const NewRole = () => {
               </div>
 
               <div
-                className={`w-6 h-6 flex items-center justify-center rounded-full ${selectedRole === 2 ? 'bg-[#4338CA]' : 'bg-white border-gray-300'
+                className={`w-6 h-6 flex items-center justify-center rounded-full transition-colors ${selectedRole === 2
+                  ? 'bg-[#4338CA]'
+                  : 'bg-white border border-gray-300 hover:bg-[#4338CA]'
                   }`}
               >
                 {selectedRole === 2 ? (
@@ -104,10 +118,20 @@ const NewRole = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 ) : (
-                  <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="white"
+                    className="w-4 h-4 opacity-0 hover:opacity-100"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
                 )}
               </div>
             </div>
+
           </div>
         </div>
       </div>
