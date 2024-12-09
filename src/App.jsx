@@ -21,7 +21,7 @@ import CreateManga from './Pages/CreateManga.jsx';
 import CreateChapter from './Pages/CreateChapter.jsx';
 import EditAuthor from './Pages/Profile.jsx';
 import EditChapter from './Pages/EditChapter.jsx';
-import AuthorCompanyRoute from './Components/AuthorComanyRoute.jsx';
+import AuthorCompanyRoute from './Components/AuthorCompanyRoute.jsx';
 
 const router = createBrowserRouter([
   {
