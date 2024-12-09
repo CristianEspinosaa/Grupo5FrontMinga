@@ -54,9 +54,9 @@ const Navbar = () => {
                   {user?.role === 3 && (
                     <li><Link to="/dashboard" className="text-white text-lg" onClick={toggleMenu}>Dashboard</Link></li>
                   )}
-                  {user?.role === 0 && (
-                    <li><Link to="/mangas" className="text-white text-lg" onClick={toggleMenu}>Mangas</Link></li>
-                  )}
+
+                  <li><Link to="/mangas" className="text-white text-lg" onClick={toggleMenu}>Mangas</Link></li>
+
                   {(user?.role === 1 || user?.role === 2) && (
                     <>
                       <li><Link to="/createmanga" className="text-white text-lg" onClick={toggleMenu}>Create Manga</Link></li>
