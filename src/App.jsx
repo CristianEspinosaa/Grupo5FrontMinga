@@ -14,7 +14,7 @@ import AdminRoute from "./Components/AdminRoute.jsx";
 import Mangas from './Pages/Mangas.jsx';
 import MangasAuth from './Pages/MangasAuth.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
-import AuthorCompanyRoute from './Components/AuthorComanyRoute.jsx';
+import AuthorCompanyRoute from './Components/AuthorCompanyRoute.jsx';
 
 const router = createBrowserRouter([
   {
