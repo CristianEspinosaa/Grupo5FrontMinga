@@ -32,7 +32,7 @@ const Navbar = () => {
       </nav>
 
       {isOpen && (
-        <div className="fixed top-0 left-0 lg:w-1/3 w-full h-full bg-blue-600 z-40">
+        <div className="fixed top-0 left-0 lg:w-1/3 w-full h-full bg-gradient-to-r from-[#4436cb] to-[#5d51f2] z-40">          
           <button className="absolute top-4 right-4" onClick={toggleMenu}>
             <img src={union} alt="Close Menu" className="h-4 w-4" />
           </button>
