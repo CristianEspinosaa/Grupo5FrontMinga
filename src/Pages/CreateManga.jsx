@@ -45,9 +45,14 @@ export default function CreateManga() {
                     toast.error("No author found for the user.");
                 }
             } catch (err) {
-                console.error("Error fetching author:", err);
-                toast.error("Failed to fetch author details.");
+                toast.error(
+                    "Error: No author found.\nPlease create an author to continue."
+                );
+                setTimeout(() => {
+                    window.location.href = '/createauthor';
+                }, 2000);
             }
+
         };
 
         const fetchCategories = async () => {
@@ -55,7 +60,7 @@ export default function CreateManga() {
                 const token = localStorage.getItem("token");
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 const response = await axios.get("http://localhost:8080/api/categories/all", config);
-        
+
                 setCategories(response.data.response);
                 console.log("Categories fetched:", response.data.response);
             } catch (error) {

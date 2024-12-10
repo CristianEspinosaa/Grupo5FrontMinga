@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importar el hook useNavigate
 import rectangle8 from '../assets/Rectangle8.png';
-import logMinga from '../assets/log_minga.jpg';
 import img1 from '../assets/author-1.png';
 import img2 from '../assets/author-2.png';
 import img3 from '../assets/author-3.png';
