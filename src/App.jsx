@@ -21,6 +21,7 @@ import CreateManga from './Pages/CreateManga.jsx';
 import CreateChapter from './Pages/CreateChapter.jsx';
 import EditAuthor from './Pages/Profile.jsx';
 import EditChapter from './Pages/EditChapter.jsx';
+import MangaDetails from './Pages/MangaDetails.jsx';
 import AuthorCompanyRoute from './Components/AuthorComanyRoute.jsx';
 
 const router = createBrowserRouter([
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
       { path: "/profile", element: <PrivateRoute><EditAuthor /></PrivateRoute> },
       { path: "/createchapter/:id", element: <PrivateRoute><CreateChapter /></PrivateRoute> },
       { path: "/editchapter/", element: <PrivateRoute><EditChapter /></PrivateRoute> },
-      
+      { path: "/mangadetails", element: <MangaDetails /> },
       { path: "*", element: <NotFound /> },
     ],
   },
