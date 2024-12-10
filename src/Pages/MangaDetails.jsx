@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import img from "../assets/FondoManga.png"
+import img from "../assets/fondoManga.jpg";
 import reaction1 from "../assets/manitoArriba.png";
 import reaction2 from "../assets/manitoAbajo.png";
 import reaction3 from "../assets/caraSorprendida.png";
@@ -11,24 +11,22 @@ const MangaDetails = () => {
 
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-100 overflow-hidden">
-
-            {/* Imagen como fondo en pantallas lg */}
+            {/* Imagen como fondo en pantallas móviles */}
             <div
-                className="absolute inset-0 bg-cover object-top lg:top-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:block hidden rounded-lg"
-                style={{ backgroundImage: `url(${img})`, height: "80%", width: "60%" }}
+                className="absolute inset-0 bg-cover object-top lg:top-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:block hidden rounded-lg sm:w-full"
+                style={{ backgroundImage: `url(${img})`, height: "50vh" }}
             ></div>
 
             <div
-                className="w-2/5 bg-gray-100 rounded-3xl shadow-lg overflow-hidden flex flex-col relative z-10
-                lg:absolute lg:bottom-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-[50%]"
+                className="w-full bg-white/90 rounded-3xl overflow-hidden flex flex-col relative z-10
+                lg:absolute lg:bottom-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-[50%] backdrop-blur shadow-xl p-4"
             >
                 <div className="relative lg:hidden h-1/2 w-full">
                     <img src={img} alt="Manga Cover" className="w-full h-full object-cover" />
                 </div>
 
-
                 {activeTab === "manga" && (
-                    <div className="p-4 flex-1 overflow-auto">
+                    <div className="p-10 flex-1 overflow-auto">
                         <h3 className="text-lg font-semibold line-clamp-2 mb-2">
                             Naruto: And That's Why You're Disqualified!! #8
                         </h3>
@@ -121,22 +119,20 @@ const MangaDetails = () => {
                 <div className="flex items-center justify-center">
                     <div className="flex justify-between items-center border-t border-gray-200 shadow-sm rounded-full w-[98%]">
                         <button
-                            className={`rounded-full w-1/2 font-medium py-2 ${
-                                activeTab === "manga"
-                                    ? "bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white"
-                                    : "hover:bg-gray-200"
-                            }`}
+                            className={`rounded-full w-1/2 font-medium py-2 ${activeTab === "manga"
+                                ? "bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white"
+                                : "hover:bg-gray-200"
+                                }`}
                             onClick={() => setActiveTab("manga")}
                         >
                             Manga
                         </button>
 
                         <button
-                            className={`rounded-full w-1/2 font-medium py-2 ${
-                                activeTab === "chapters"
-                                    ? "bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white"
-                                    : "hover:bg-gray-200"
-                            }`}
+                            className={`rounded-full w-1/2 font-medium py-2 ${activeTab === "chapters"
+                                ? "bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white"
+                                : "hover:bg-gray-200"
+                                }`}
                             onClick={() => setActiveTab("chapters")}
                         >
                             Chapters
@@ -145,7 +141,7 @@ const MangaDetails = () => {
                 </div>
 
                 {activeTab === "manga" && (
-                    <p className="p-3 font-light text-sm text-gray-600 whitespace-normal break-words">
+                    <p className="p-3 font-light text-sm text-gray-600 whitespace-normal break-words ">
                         Naruto Uzumaki es un joven ninja lleno de energía que sueña con convertirse en el Hokage, el líder más fuerte y respetado de su aldea. A lo largo de su viaje, enfrenta desafíos, hace amigos y descubre el verdadero significado del esfuerzo y la perseverancia.
                     </p>
                 )}

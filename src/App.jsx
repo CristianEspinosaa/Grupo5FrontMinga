@@ -22,7 +22,7 @@ import CreateChapter from './Pages/CreateChapter.jsx';
 import EditAuthor from './Pages/Profile.jsx';
 import EditChapter from './Pages/EditChapter.jsx';
 import AuthorCompanyRoute from './Components/AuthorCompanyRoute.jsx';
-import Chapters from './Pages/Chapters.jsx';
+import MangaDetails from './Pages/MangaDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/mangas", element: <PrivateRoute><Mangas /></PrivateRoute> },
       { path: "/mangas-manager", element: <PrivateRoute><AuthorCompanyRoute><MangasAuth /></AuthorCompanyRoute></PrivateRoute>},
-      { path: "/chapters", element: <PrivateRoute><Chapters /></PrivateRoute> },
+      { path: "/manga-details", element: <PrivateRoute><MangaDetails /></PrivateRoute> },
       { path: "/register", element: <SignRoute><Register /></SignRoute> },
       { path: "/login", element: <SignRoute><Login /></SignRoute> },
       { path: "/dashboard", element: <AdminRoute><DashBoard /></AdminRoute> },
