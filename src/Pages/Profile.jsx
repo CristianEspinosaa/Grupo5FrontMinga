@@ -123,7 +123,7 @@ const EditAuthor = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             toast.success(response.data.message || "Account deleted successfully.");
-            navigate("/");
+            window.location.href = "/";
         } catch (error) {
             console.error("Error deleting account:", error);
             toast.error("Failed to delete account. Please try again later.");

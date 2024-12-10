@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -9,6 +10,17 @@ import {
   REGISTER_FAILURE,
   VALIDATE_TOKEN
 } from '../actions/authActions';
+=======
+// authReducers.js
+
+import { 
+  LOGIN_REQUEST, 
+  LOGIN_SUCCESS, 
+  LOGIN_FAILURE, 
+  SET_USER, 
+  LOGOUT 
+} from '../actions/authActions'; // Asegúrate de que la ruta sea correcta
+>>>>>>> goyes
 
 const initialState = {
   user: null,
@@ -16,7 +28,11 @@ const initialState = {
   loading: false,
   error: null,
   isAuthenticated: false,
+<<<<<<< HEAD
   status: 'idle'
+=======
+  hasRefreshed: null,
+>>>>>>> goyes
 };
 
 const authReducer = (state = initialState, action) => {
@@ -55,6 +71,7 @@ const authReducer = (state = initialState, action) => {
               error: action.payload,
           };
 
+<<<<<<< HEAD
       case SET_USER:
           return {
               ...state,
@@ -64,6 +81,18 @@ const authReducer = (state = initialState, action) => {
               isAuthenticated: true,
               status: 'succeeded'
           };
+=======
+    case LOGOUT:
+      return {
+        ...state,
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        error: null,
+        hasRefreshed: null,
+      };
+>>>>>>> goyes
 
       case VALIDATE_TOKEN:
           return {

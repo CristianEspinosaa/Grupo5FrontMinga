@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -9,6 +10,16 @@ import {
   LOGOUT,
   VALIDATE_TOKEN
 } from '../actions/registerActions';
+=======
+// registerReducer.js
+
+import { 
+  REGISTER_REQUEST, 
+  REGISTER_SUCCESS, 
+  REGISTER_FAILURE, 
+  SET_USER 
+} from '../actions/registerActions'; // Asegúrate de que la ruta sea correcta
+>>>>>>> goyes
 
 const initialState = {
   user: null,
@@ -19,7 +30,11 @@ const initialState = {
   status: 'idle'
 };
 
+<<<<<<< HEAD
 const authReducer = (state = initialState, action) => {
+=======
+const registerReducer = (state = initialState, action) => {
+>>>>>>> goyes
   switch (action.type) {
     case REGISTER_REQUEST:
     case LOGIN_REQUEST:
@@ -84,4 +99,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default registerReducer;

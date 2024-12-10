@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreateChapter() {
     const token = localStorage.getItem("token");
+    const navigate = useNavigate(); // Hook para redirección
     const [mangaId, setMangaId] = useState(null);
     const [chapterData, setChapterData] = useState({
         title: '',
@@ -64,6 +65,11 @@ export default function CreateChapter() {
         }
     };
 
+    const handleBackToHome = (e) => {
+        e.preventDefault(); // Evita el comportamiento por defecto del botón
+        navigate('/mangas-manager'); // Redirige al inicio
+    };
+
     return (
         <div className="flex justify-center w-full h-screen bg-gray-200">
             <form
@@ -108,6 +114,13 @@ export default function CreateChapter() {
                     className="w-3/5 h-12 bg-[#4338CA] text-white rounded-full text-xl cursor-pointer mt-4"
                 >
                     Create Chapter
+                </button>
+                <button
+                    type="button" // Cambia a "button" para evitar que actúe como submit
+                    className="w-3/5 h-12 bg-[#4338CA] text-white rounded-full text-xl cursor-pointer mt-4"
+                    onClick={handleBackToHome} // Agrega el manejador de clic
+                >
+                    My Mangas
                 </button>
             </form>
             <Toaster position="top-center" reverseOrder={false} />

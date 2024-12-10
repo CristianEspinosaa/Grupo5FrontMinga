@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import axios from 'axios';
 import image from '../assets/default-profile.png';
 
@@ -30,6 +31,7 @@ const CreateCompany = () => {
             await axios.post(url, data, headers);
             toast.success('Company successfully created');
             event.target.reset();
+            window.location.href = '/'; // Redirigir al home
         } catch (error) {
             if (typeof error.response.data.message === 'string') {
                 toast.error(error.response.data.message);
