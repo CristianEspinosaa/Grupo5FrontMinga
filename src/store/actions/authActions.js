@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logoutAuthor } from './authorActions';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -48,7 +49,8 @@ export const logout = () => (dispatch) => {
       );
     }
     removeAuthToken();
-    removeUserData();
+    removeUserData();    
+    dispatch(logoutAuthor());
     dispatch({ type: LOGOUT });
   } catch (error) {
     console.error('Error durante el logout:', error);

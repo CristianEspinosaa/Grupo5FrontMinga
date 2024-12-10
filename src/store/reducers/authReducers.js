@@ -1,10 +1,12 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  SET_USER,
-  LOGOUT,
-} from '../actions/authActions';
+// authReducers.js
+
+import { 
+  LOGIN_REQUEST, 
+  LOGIN_SUCCESS, 
+  LOGIN_FAILURE, 
+  SET_USER, 
+  LOGOUT 
+} from '../actions/authActions'; // Asegúrate de que la ruta sea correcta
 
 const initialState = {
   user: null,
@@ -12,6 +14,7 @@ const initialState = {
   loading: false,
   error: null,
   isAuthenticated: false,
+  hasRefreshed: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -57,6 +60,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         loading: false,
         error: null,
+        hasRefreshed: null,
       };
 
     default:

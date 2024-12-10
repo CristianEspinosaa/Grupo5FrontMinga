@@ -8,9 +8,7 @@ import backgroundImage from "../assets/manga-read.jpg";
 
 const MangasAuth = () => {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.categories); // Categorías desde Redux
-  const { mangas } = useSelector((state) => state.mangas); // Mangas desde Redux
-
+  const { categories } = useSelector((state) => state.categories); // Categorías desde Redux  
   const [searchTerm, setSearchTerm] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -42,7 +40,7 @@ const MangasAuth = () => {
         const author = authorResponse.data.response[0];
         if (author) {
           setAuthorId(author._id);
-          
+
           console.log("Author ID:", author._id); // Log en consola
           console.log("Nombre:", author.name); // Log en consola
         } else {
@@ -63,7 +61,7 @@ const MangasAuth = () => {
   // Leer categorías al montar el componente
   useEffect(() => {
     dispatch(readCategories());
-  }, [dispatch]);
+  }, [dispatch]);  
 
   // Leer mangas por autor
   useEffect(() => {
@@ -129,6 +127,8 @@ const MangasAuth = () => {
     };
     return colors[categoryId] || colors.default;
   };
+
+  const { mangas } = useSelector((state) => state.mangas); 
 
   // Filtrar mangas
   const filteredMangas = useMemo(() => {

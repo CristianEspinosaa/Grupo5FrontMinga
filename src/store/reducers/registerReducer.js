@@ -1,9 +1,11 @@
-import {
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  SET_USER,
-} from '../actions/registerActions';
+// registerReducer.js
+
+import { 
+  REGISTER_REQUEST, 
+  REGISTER_SUCCESS, 
+  REGISTER_FAILURE, 
+  SET_USER 
+} from '../actions/registerActions'; // Asegúrate de que la ruta sea correcta
 
 const initialState = {
   user: null,
@@ -13,8 +15,7 @@ const initialState = {
   isAuthenticated: false,
 };
 
-
-const authReducer = (state = initialState, action) => {
+const registerReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_REQUEST:
       return {
@@ -47,4 +48,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default registerReducer;

@@ -15,13 +15,20 @@ const Navbar = () => {
   const token = useSelector((state) => state.auth.token);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
+  
   const handleLogout = () => {
     dispatch(logout());
     toast.success('Sesión cerrada exitosamente');
     navigate('/login');
   };
 
+  const handleClic = () => {    
+    setIsOpen(!isOpen);
+    setTimeout(() => {
+      window.location.reload();
+    }, 0);    
+  };
+    
   return (
     <div className="fixed top-0 left-0 w-full z-50">
       <nav className="flex justify-between items-center px-6 py-4 bg-transparent">
@@ -57,9 +64,9 @@ const Navbar = () => {
                   {(user?.role === 1 || user?.role === 2) && (
                     <>
                       <li><Link to="/createmanga" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>Create Manga</Link></li>
-                      <li><Link to="/mangas-manager" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={toggleMenu}>My Mangas</Link></li>
+                      <li><Link to="/mangas-manager" className="text-white text-lg p-2 rounded-md block hover:text-blue-600 hover: hover:bg-white" onClick={handleClic}>My Mangas</Link></li>
                     </>
-                  )}                  
+                  )}
                   <li><button onClick={handleLogout} className="text-white text-lg p-2 rounded-md w-full text-left hover:text-blue-600 hover: hover:bg-white">Logout</button></li>
                 </>
               )}

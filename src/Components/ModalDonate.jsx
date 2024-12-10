@@ -43,6 +43,8 @@ export default function ModalDonate() {
     },
   ];
 
+  const token = localStorage.getItem('token'); // Obtener el token de localStorage
+
   return (
     <>
       {isOpen && modalName === 'modalDonate' && (
@@ -56,8 +58,17 @@ export default function ModalDonate() {
                   id={btn.id}
                   onClick={() => {
                     axios
-                      .post('http://localhost:8080/api/payment', btn)
-                      .then((res) => (window.location.href = res.data.response.body.init_point));
+                      .post(
+                        'http://localhost:8080/api/payment', 
+                        btn, 
+                        {
+                          headers: {
+                            Authorization: `Bearer ${token}`, // Enviar el token en los encabezados
+                          },
+                        }
+                      )
+                      .then((res) => (window.location.href = res.data.response.body.init_point))
+                      .catch((error) => console.error('Error al hacer la donación:', error));
                   }}
                 >
                   {btn.title}
