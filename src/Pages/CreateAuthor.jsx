@@ -33,16 +33,17 @@ const CreateAuthor = () => {
       dispatch(createAuthor(data));
 
       if (error) {
-        toast.error(error);
+        toast.error("Error");
       } else {
         toast.success('Author created successfully');
+        window.location.href = '/'; // Redirigir al home
       }
 
       event.target.reset();
     } else {
       toast.error("Error in your credentials (don't forget the comma after the city)");
     }
-  };
+  };  
 
   return (
     <div className="flex justify-center w-full h-screen bg-gray-200">

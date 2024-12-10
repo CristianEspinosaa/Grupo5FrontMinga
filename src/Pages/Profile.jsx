@@ -63,6 +63,7 @@ const EditAuthor = () => {
             } catch (err) {
                 console.error("Error fetching author:", err);
             }
+            
         };
 
         if (token) {
@@ -122,7 +123,7 @@ const EditAuthor = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             toast.success(response.data.message || "Account deleted successfully.");
-            navigate("/");
+            window.location.href = "/";
         } catch (error) {
             console.error("Error deleting account:", error);
             toast.error("Failed to delete account. Please try again later.");
@@ -147,7 +148,7 @@ const EditAuthor = () => {
                     <h2 className="text-lg font-semibold">{authorData.name} {authorData.last_name}</h2>
                     <div className="flex items-center text-gray-600 text-sm mt-2">
                         <img src={location} alt="Location Icon" className="w-5 h-5 mr-2" />
-                        <span>{authorData.city}, {authorData.country}</span>
+                        <span>{authorData.city} {authorData.country}</span>
                     </div>
                     <div className="flex items-center text-gray-600 text-sm mt-1">
                         <img src={icon1} alt="Calendar Icon" className="w-5 h-5 mr-2" />

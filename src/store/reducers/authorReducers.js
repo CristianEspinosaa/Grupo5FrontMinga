@@ -12,6 +12,9 @@ const authorReducer = (state = initialState, action) => {
       return { ...state, loading: false, authors: [...state.authors, action.payload] };
     case 'CREATE_AUTHOR_FAILURE':
       return { ...state, loading: false, error: action.payload };
+    case 'LOGOUT_AUTHOR':
+      // Resetear el estado de los autores cuando el usuario cierre sesión
+      return { ...initialState };
     default:
       return state;
   }
