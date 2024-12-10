@@ -200,37 +200,52 @@ const MangasAuth = () => {
           </div>
           <div>
             {/* Manga Grid */}
-            {filteredMangas.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredMangas.map((manga, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[280px] sm:w-[360px] h-[120px] sm:h-[144px] mx-auto md:ml-20"
-                  >
-                    {/* Line Indicator */}
-                    <div
-                      className={`w-1 h-full self-stretch ${getLineColor(manga.category_id._id)}`}
-                    ></div>
+{filteredMangas.length > 0 ? (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {filteredMangas.map((manga, index) => (
+      <div
+        key={index}
+        className="relative flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[280px] sm:w-[360px] h-[120px] sm:h-[144px] mx-auto md:ml-20"
+      >
+        {/* Top Action Buttons */}
+        <div className="absolute top-2 right-2 flex gap-2 z-10">
+          <button 
+            className="w-8 h-8 flex items-center justify-center bg-violet-100 text-violet-600 rounded-full hover:bg-violet-200 transition-colors"
+            onClick={() => {/* función para añadir capítulo */}}
+          >
+            +
+          </button>
+          <button 
+            className="w-8 h-8 flex items-center justify-center bg-violet-100 text-violet-600 rounded-full hover:bg-violet-200 transition-colors"
+          >
+            ✎
+          </button>
+        </div>
 
-                    {/* Manga Details */}
-                    <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
-                      <h3 className="font-normal text-sm sm:text-lg leading-tight line-clamp-1">
-                        {manga.title}
-                      </h3>
-                      <p
-                        className={`text-sm ${getCategoryStyle(manga.category_id._id).inactive.split(' ')[1]}`}
-                      >
-                        {manga.category_id.name}
-                      </p>
-                      <div className="flex gap-2">
-                        <button className="px-4 py-1 bg-violet-100 text-violet-600 rounded-full text-sm hover:bg-violet-200 transition-colors">
-                          Edit
-                        </button>
-                        <button className="px-4 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200 transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
+        {/* Line Indicator */}
+        <div
+          className={`w-1 h-full self-stretch ${getLineColor(manga.category_id._id)}`}
+        ></div>
+
+        {/* Manga Details */}
+        <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
+          <h3 className="font-normal text-sm sm:text-lg leading-tight line-clamp-1">
+            {manga.title}
+          </h3>
+          <p
+            className={`text-sm ${getCategoryStyle(manga.category_id._id).inactive.split(' ')[1]}`}
+          >
+            {manga.category_id.name}
+          </p>
+          <div className="flex gap-2">
+            <button className="px-4 py-1 bg-violet-100 text-violet-600 rounded-full text-sm hover:bg-violet-200 transition-colors">
+              Edit
+            </button>
+            <button className="px-4 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200 transition-colors">
+              Delete
+            </button>
+          </div>
+        </div>
 
                     {/* Manga Cover */}
                     <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
