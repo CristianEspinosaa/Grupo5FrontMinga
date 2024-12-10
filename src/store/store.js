@@ -6,6 +6,7 @@ import categoriesReducer from './reducers/categoriesReducers';
 import mangasReducer from './reducers/mangasReducers';
 import modalReducer from './reducers/modalReducers';
 import searchReducer from './reducers/searchReducer';
+import chaptersReducer from './reducers/chaptersReducers';
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     categories: categoriesReducer,
     mangas: mangasReducer,
     search: searchReducer,
+    chapter: chaptersReducer,
     modal: modalReducer,  
   },
 });

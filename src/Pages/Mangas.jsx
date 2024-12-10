@@ -1,13 +1,15 @@
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { Search } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchTerm } from '../store/actions/searchActions'; 
+import { setSearchTerm } from '../store/actions/searchActions';
 import { readCategories } from '../store/actions/categoriesActions';
 import { readMangas } from '../store/actions/mangasActions';
+import { useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
 import backgroundImage from '../assets/FondoManga2.jpeg';
 
 const Mangas = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Inicializa navigate aquí
   const { categories } = useSelector((state) => state.categories);
   const { mangas } = useSelector((state) => state.mangas);
   const searchTerm = useSelector((state) => state.search.searchTerm);
@@ -35,7 +37,7 @@ const Mangas = () => {
 
   const handleCategoryChange = useCallback((categoryId) => {
     setSelectedCategory(categoryId);
-    setPageNumber(1); 
+    setPageNumber(1);
   }, []);
 
   // Filtrar mangas basado en búsqueda y categoría
@@ -54,6 +56,11 @@ const Mangas = () => {
   // Función para manejar la búsqueda
   const handleSearchChange = (e) => {
     dispatch(setSearchTerm(e.target.value)); // Actualiza el término de búsqueda en Redux
+  };
+
+  // Función para manejar el click en "Read"
+  const handleReadClick = (mangaId) => {
+    navigate(`/manga-details/${mangaId}`); // Redirige a la página de detalles del manga
   };
 
   // Estilos de categoría
@@ -103,7 +110,7 @@ const Mangas = () => {
     const startIndex = (pageNumber - 1) * 10; // Asume que quieres 10 mangas por página
     return filteredMangas.slice(startIndex, startIndex + 10); // Extrae los mangas correspondientes a la página actual
   }, [filteredMangas, pageNumber]);
-  
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div
@@ -175,7 +182,10 @@ const Mangas = () => {
                       {manga.category_id.name}
                     </p>
                     <div className="flex gap-2">
-                      <button className="px-4 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors">
+                      <button
+                        onClick={() => handleReadClick(manga._id)} // Redirige con el ID
+                        className="px-4 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm hover:bg-emerald-200 transition-colors"
+                      >
                         Read
                       </button>
                     </div>

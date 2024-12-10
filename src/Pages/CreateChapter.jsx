@@ -67,7 +67,7 @@ export default function CreateChapter() {
 
     const handleBackToHome = (e) => {
         e.preventDefault(); // Evita el comportamiento por defecto del botón
-        navigate('/'); // Redirige al inicio
+        navigate('/mangas-manager'); // Redirige al inicio
     };
 
     return (
@@ -120,7 +120,7 @@ export default function CreateChapter() {
                     className="w-3/5 h-12 bg-[#4338CA] text-white rounded-full text-xl cursor-pointer mt-4"
                     onClick={handleBackToHome} // Agrega el manejador de clic
                 >
-                    Back To Home
+                    My Mangas
                 </button>
             </form>
             <Toaster position="top-center" reverseOrder={false} />

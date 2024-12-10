@@ -6,6 +6,7 @@ import { readCategories } from "../store/actions/categoriesActions";
 import backgroundImage from "../assets/manga-read.jpg";
 import add from "../assets/add.png";
 import edit from "../assets/edit.png";
+import Swal from 'sweetalert2';
 
 const MangasAuth = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const MangasAuth = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [authorId, setAuthorId] = useState(null);
-    const [authorName, setAuthorName] = useState("");
+    const [authorName, setAuthorName] = useState('');
 
     const token = localStorage.getItem("token");
 
@@ -48,6 +49,8 @@ const MangasAuth = () => {
                 if (author) {
                     setAuthorId(author._id);
                     setAuthorName(author.name);
+                    console.log(authorId)
+                    console.log(authorName);
                 } else {
                     console.error("No se encontró un autor para este usuario.");
                 }
@@ -104,13 +107,20 @@ const MangasAuth = () => {
     }, []);
 
     const handleDeleteManga = async (mangaId) => {
-        // Mostrar el mensaje de confirmación
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this manga? This action cannot be undone."
-        );
+        try {
+            // Mostrar el diálogo de confirmación con SweetAlert2
+            const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to undo this action!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+            });
 
-        if (confirmDelete) {
-            try {
+            if (result.isConfirmed) {
                 // Realizar la solicitud DELETE para borrar el manga
                 await axios.delete(`http://localhost:8080/api/mangas/delete/${mangaId}`, {
                     headers: { Authorization: `Bearer ${token}` },
@@ -118,9 +128,14 @@ const MangasAuth = () => {
 
                 // Eliminar el manga de la lista en el estado local
                 setMangas((prevMangas) => prevMangas.filter((manga) => manga._id !== mangaId));
-            } catch (error) {
-                console.error("Error deleting manga:", error);
+
+                // Mostrar mensaje de éxito
+                Swal.fire('Deleted!', 'Your manga has been deleted.', 'success');
             }
+        } catch (error) {
+            console.error("Error deleting manga:", error);
+            // Mostrar mensaje de error
+            Swal.fire('Error', 'Failed to delete the manga. Please try again.', 'error');
         }
     };
 
