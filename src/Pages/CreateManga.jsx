@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom"; // Agrega esta línea
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export default function CreateManga() {
     const token = localStorage.getItem("token");
     const [categories, setCategories] = useState([]);
     const [author, setAuthor] = useState(null);
-    const navigate = useNavigate(); // Agrega esta línea para la navegación
+    const navigate = useNavigate();
 
     const title = useRef();
     const category = useRef();
@@ -37,22 +38,27 @@ export default function CreateManga() {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 const response = await axios.get(`http://localhost:8080/api/authors/byUser/${userId}`, config);
 
-                const authorData = response.data.response[0];
+                const authorData = response?.data?.response[0];
                 if (authorData) {
                     setAuthor(authorData);
                     console.log("Author data:", authorData);
-                } else {
-                    toast.error("No author found for the user.");
                 }
             } catch (err) {
-                toast.error(
-                    "Error: No author found.\nPlease create an author to continue."
-                );
-                setTimeout(() => {
-                    window.location.href = '/createauthor';
-                }, 2000);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No author found',
+                    text: 'Please create an author to continue.',
+                    showCancelButton: true,
+                    confirmButtonText: 'Create Author',
+                    cancelButtonText: 'Go to Mangas'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/createauthor';
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        window.location.href = '/mangas';
+                    }
+                });
             }
-
         };
 
         const fetchCategories = async () => {

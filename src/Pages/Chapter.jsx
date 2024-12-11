@@ -34,22 +34,23 @@ const Chapter = () => {
       }
       navigate(`/chapter/${id}/${newIndex}`);
       return newIndex;
-      
+
     });
   };
 
   const handleNext = () => {
     setIndex((prevIndex) => {
       const newIndex = prevIndex + 1;
+
       if (newIndex >= chapter?.pages?.length) {
-        navigate(`/chapter/${next}/1`);
-        window.location.reload(true);
+        navigate(`/manga-details/${chapter.manga_id}/1`);
         return newIndex;
       }
       navigate(`/chapter/${id}/${newIndex}`);
       return newIndex;
     });
   };
+
 
   const handlePageSelect = (e) => {
     const selectedPage = parseInt(e.target.value);

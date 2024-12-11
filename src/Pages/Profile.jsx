@@ -6,6 +6,7 @@ import img1 from "../assets/Rectangle10.png";
 import fondo1 from "../assets/Rectangle606.png";
 import location from "../assets/location-marker.png";
 import icon1 from "../assets/icon.png";
+import Swal from 'sweetalert2';
 
 const EditAuthor = () => {
     const token = localStorage.getItem("token");
@@ -63,7 +64,7 @@ const EditAuthor = () => {
             } catch (err) {
                 console.error("Error fetching author:", err);
             }
-            
+
         };
 
         if (token) {
@@ -109,26 +110,43 @@ const EditAuthor = () => {
             toast.error("Failed to save author details.");
         }
     };
-
+    
     const handleDelete = async () => {
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete your account? This action cannot be undone."
-        );
-
-        if (!confirmDelete) return;
-
-        try {
-            const response = await axios.delete(
-                `http://localhost:8080/api/authors/delete/${authorData._id}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            toast.success(response.data.message || "Account deleted successfully.");
-            window.location.href = "/";
-        } catch (error) {
-            console.error("Error deleting account:", error);
-            toast.error("Failed to delete account. Please try again later.");
-        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: 'Are you sure you want to delete your account? This action cannot be undone.',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.delete(
+                        `http://localhost:8080/api/authors/delete/${authorData._id}`,
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    );
+                    Swal.fire(
+                        'Deleted!',
+                        response.data.message || 'Your account has been deleted.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = '/';
+                    });
+                } catch (error) {
+                    console.error("Error deleting account:", error);
+                    Swal.fire(
+                        'Error!',
+                        'Failed to delete account. Please try again later.',
+                        'error'
+                    );
+                }
+            }
+        });
     };
+
 
     return (
         <div className="relative">
