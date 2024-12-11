@@ -64,7 +64,11 @@ const EditAuthor = () => {
             } catch (err) {
                 console.error("Error fetching author:", err);
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 5f04271326e6dedb30bc47313970214376163e60
         };
 
         if (token) {
@@ -153,10 +157,10 @@ const EditAuthor = () => {
             <div className="hidden sm:block h-[60vh] bg-cover relative px-8" style={{ backgroundImage: `url(${fondo1})`, backgroundPosition: 'center' }}>
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="relative h-full flex items-center justify-center">
-                    <h1 className="text-4xl font-bold text-white">Profile</h1>
+                    <h1 className="text-6xl font-bold text-white">Profile</h1>
                 </div>
             </div>
-            <div className="relative bg-white/90 backdrop-blur-sm flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around lg:-mt-10 lg:my-10 lg:rounded-3xl bottom-0 left-1/2 transform -translate-x-1/2 w-screen h-screen lg:w-[80%] lg:h-[60vh] shadow-lg z-10">
+            <div className="relative bg-white backdrop-blur-sm flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around lg:-mt-10 lg:my-10 lg:rounded-3xl bottom-32 left-1/2 transform -translate-x-1/2 w-screen h-screen lg:w-[80%] lg:h-[60vh] shadow-lg z-10">
                 <div className="p-6">
                     <img
                         src={authorData.photo || img1}
