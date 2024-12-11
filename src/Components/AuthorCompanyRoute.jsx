@@ -13,11 +13,9 @@ const AuthorCompanyRoute = ({ children }) => {
                 try {
                     const response = await axios.get('http://localhost:8080/api/users/validateToken', {
                         headers: { Authorization: `Bearer ${token}` },
-                    });
-                    dispatch(setUser(response.data.user)); // Actualiza el usuario en el estado
+                    });                    
                 } catch (error) {
                     console.error('Error fetching user:', error);
-                    dispatch(validateToken(null));
                 }
             }
         };

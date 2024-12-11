@@ -6,8 +6,9 @@ import img1 from "../assets/Rectangle10.png";
 import fondo1 from "../assets/Rectangle606.png";
 import location from "../assets/location-marker.png";
 import icon1 from "../assets/icon.png";
+import port from "../assets/portadamanga.png"
 
-const EditAuthor = () => {
+const AuthorProfile = () => {
     const token = localStorage.getItem("token");
     const [authorData, setAuthorData] = useState({
         name: "",
@@ -63,7 +64,7 @@ const EditAuthor = () => {
             } catch (err) {
                 console.error("Error fetching author:", err);
             }
-            
+
         };
 
         if (token) {
@@ -135,10 +136,10 @@ const EditAuthor = () => {
             <div className="hidden sm:block h-[60vh] bg-cover relative px-8" style={{ backgroundImage: `url(${fondo1})`, backgroundPosition: 'center' }}>
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="relative h-full flex items-center justify-center">
-                    <h1 className="text-6xl font-bold text-white">Profile</h1>
+                    <h1 className="text-4xl font-bold text-white">Author Profile</h1>
                 </div>
             </div>
-            <div className="relative bg-white backdrop-blur-sm flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around lg:-mt-10 lg:my-10 lg:rounded-3xl bottom-32 left-1/2 transform -translate-x-1/2 w-screen h-screen lg:w-[80%] lg:h-[60vh] shadow-lg z-10">
+            <div className="relative bg-white backdrop-blur-sm flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-around lg:-mt-10 lg:my-10 lg:rounded-3xl bottom-0 left-1/2 transform -translate-x-1/2 w-screen h-screen lg:w-[80%] lg:h-[60vh] shadow-lg z-10">
                 <div className="p-6">
                     <img
                         src={authorData.photo || img1}
@@ -155,77 +156,38 @@ const EditAuthor = () => {
                         <span>{authorData.formattedDate}</span>
                     </div>
                 </div>
-                <form onSubmit={handleSubmit} className="flex flex-col items-center p-2 rounded-lg w-2/3 lg:w-96 sm:mt-2 lg:mt-0">
-                    <input
-                        type="text"
-                        name="name"
-                        value={authorData.name}
-                        onChange={(e) => setAuthorData({ ...authorData, name: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        placeholder="First Name"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="last_name"
-                        value={authorData.last_name}
-                        onChange={(e) => setAuthorData({ ...authorData, last_name: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        placeholder="Last Name"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="city"
-                        value={authorData.city}
-                        onChange={(e) => setAuthorData({ ...authorData, city: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        placeholder="City"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="country"
-                        value={authorData.country}
-                        onChange={(e) => setAuthorData({ ...authorData, country: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        placeholder="Country"
-                        required
-                    />
-                    <input
-                        type="date"
-                        name="date"
-                        value={convertToDateFormat(authorData.formattedDate)}
-                        onChange={(e) => setAuthorData({ ...authorData, formattedDate: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        required
-                    />
-                    <input
-                        type="url"
-                        name="photo"
-                        value={authorData.photo}
-                        onChange={(e) => setAuthorData({ ...authorData, photo: e.target.value })}
-                        className="w-full mb-4 border-b-2 border-gray-500 focus:outline-none focus:border-green-500"
-                        placeholder="URL Profile Image"
-                    />
-                    <button
-                        type="submit"
-                        className="w-full h-10 p-1 mb-4 font-semibold text-white text-2xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
-                    >
-                        Save
-                    </button>
-                    <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="w-full h-10 p-1 text-[#EE8380] font-semibold text-2xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
-                    >
-                        Delete
-                    </button>
-                </form>
+                <div className="mt-4 w-full max-w-lg h-64 sm:h-auto sm:overflow-y-visible overflow-y-auto grid grid-cols-2 gap-4 p-4  rounded-lg">
+                    {[
+                        {
+                            title: 'Komi san Cant Communicate',
+                            image: 'https://via.placeholder.com/150',
+                        },
+                        { title: 'Boruto', image: 'https://via.placeholder.com/150' },
+                        { title: 'Evangelion', image: 'https://via.placeholder.com/150' },
+                        { title: 'Kaguya-sama: Love is war', image: 'https://via.placeholder.com/150' },
+                    ].map((item, index) => (
+                        <div
+                            key={index}
+                            className=" p-4 rounded-lg flex flex-col w-48 h-48"
+                        >
+                            <img
+                                src={port}
+                                alt={item.title}
+                                className="w-full h-full object-cover rounded-lg"
+                            />
+                            <h3 className="mt-2 text-center text-sm font-semibold">
+                                {item.title}
+                            </h3>
+                        </div>
+                    ))}
+                </div>
+
                 <Toaster position="top-center" reverseOrder={false} />
             </div>
         </div>
+
+        
     );
 };
 
-export default EditAuthor;
+export default AuthorProfile;
