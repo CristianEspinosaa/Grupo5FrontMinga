@@ -2,19 +2,22 @@ import img1 from '../assets/image4.png';
 
 const EditChapter = () => {
     return (
-        <div className="flex items-center justify-center h-screen w-">
-            <div className="flex flex-col lg:flex-row-reverse lg:items-center justify-center lg:justify-around rounded-2xl bg-white p-6 lg:p-8 w-2/3 max-w-4xl">
-                <div className="hidden lg:flex flex-col items-center p-6 rounded-lg w-full lg:w-full">
+        <div className="flex items-center justify-center h-screen w-full bg-gray-100">
+            <div className="flex flex-col lg:flex-row-reverse lg:items-center justify-center lg:justify-around rounded-2xl bg-white p-6 lg:p-8 w-full lg:w-2/3 max-w-4xl shadow-lg overflow-y-auto max-h-screen">
+                {/* Sección de imagen */}
+                <div className="hidden lg:flex flex-col items-center p-6 rounded-lg lg:w-full">
                     <h2 className="text-lg font-light mb-4">Chapter #1 - Discover the word</h2>
                     <img
                         src={img1}
                         alt="User Profile"
-                        className=""
+                        className="max-w-full h-auto"
                     />
                 </div>
-                <div className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-3/4">
-                    <h2 className="text-2xl font-semibold mb-24 text-center">Edit Chapter</h2>
-                    <form className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-full">
+
+                {/* Sección de formulario */}
+                <div className="flex flex-col items-center p-6 rounded-lg w-full lg:w-3/4">
+                    <h2 className="text-2xl font-semibold mb-6 text-center">Edit Manga</h2>
+                    <form className="flex flex-col items-center w-full">
                         <input
                             type="text"
                             name="nameOfManga"
@@ -45,13 +48,13 @@ const EditChapter = () => {
                         />
                         <button
                             type="submit"
-                            className="w-full h-16 p-2 mt-6 mb-4 font-semibold text-white text-2xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
+                            className="w-full h-12 p-2 mt-6 mb-4 font-semibold text-white text-xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
                         >
                             Edit
                         </button>
                         <button
                             type="button"
-                            className="w-full h-16 mt-4 p-2 text-[#EE8380] font-semibold text-2xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
+                            className="w-full h-12 mt-4 p-2 text-[#EE8380] font-semibold text-xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
                         >
                             Delete
                         </button>

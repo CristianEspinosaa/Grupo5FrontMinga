@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       { path: "/createmanga", element: <PrivateRoute><CreateManga /></PrivateRoute> },
       { path: "/profile", element: <PrivateRoute><EditAuthor /></PrivateRoute> },
       { path: "/createchapter/:id/", element: <PrivateRoute><CreateChapter /></PrivateRoute> },
-      { path: "/editchapter/", element: <PrivateRoute><EditChapter /></PrivateRoute> },
+      { path: "/editmanga/", element: <PrivateRoute><EditChapter /></PrivateRoute> },
       
       { path: "*", element: <NotFound /> },
     ],

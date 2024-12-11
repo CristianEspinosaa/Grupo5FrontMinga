@@ -1,22 +1,25 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import axios from "axios";
 import { readCategories } from "../store/actions/categoriesActions";
 import backgroundImage from "../assets/manga-read.jpg";
 import add from "../assets/add.png";
-import edit from "../assets/edit.png";
-import Swal from 'sweetalert2';
+import edit from "../assets/edit2.png";
+import Swal from "sweetalert2";
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 const MangasAuth = () => {
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.categories.categories); // Usamos el estado de Redux
+    const navigate = useNavigate(); // Declarar navigate
+    const categories = useSelector((state) => state.categories.categories);
     const [mangas, setMangas] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [authorId, setAuthorId] = useState(null);
-    const [authorName, setAuthorName] = useState('');
+    const [authorName, setAuthorName] = useState("");
 
     const token = localStorage.getItem("token");
 
@@ -253,8 +256,43 @@ const MangasAuth = () => {
                     </div>
                     <div>
                         {/* Manga Grid */}
-                        {filteredMangas.length > 0 ? (
+                        {filteredMangas.length > -1 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Tarjeta para Crear Mangas */}
+                                <div
+                                    className="relative flex items-center bg-white overflow-hidden hover:bg-gray-50 transition-colors w-[280px] sm:w-[360px] h-[120px] sm:h-[144px] mx-auto md:ml-20"
+                                >
+                                    {/* Indicador lateral estático */}
+                                    <div className={`w-1 h-full self-stretch bg-blue-500`}></div>
+
+                                    {/* Detalles estáticos de la tarjeta */}
+                                    <div className="flex flex-col gap-1 p-3 rounded-l-[2rem] w-[180px]">
+                                        <h3 className="font-normal text-sm sm:text-lg leading-tight line-clamp-1">
+                                            Create Manga
+                                        </h3>
+                                        <p className="text-sm text-blue-600">
+                                            Start now
+                                        </p>
+                                        <div className="flex gap-2">
+                                            <button
+                                                className="px-4 py-1 bg-violet-100 text-violet-600 rounded-full text-sm hover:bg-violet-200 transition-colors"
+                                                onClick={() => navigate('/createmanga')}
+                                            >
+                                                Create
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Imagen estática de portada */}
+                                    <div className="w-[160px] h-[144px] flex-shrink-0 ml-auto">
+                                        <img
+                                            src="https://media.istockphoto.com/id/1265174828/es/foto/artista-dibujando-un-c%C3%B3mic-de-anime-en-un-estudio.jpg?s=612x612&w=0&k=20&c=7WWNyt7OS1ZGhmpgdJyr5UdZafHT8ygxp14yAG1lsPQ="
+                                            alt="Create Manga"
+                                            className="w-full h-full object-cover rounded-l-full rounded-r-lg"
+                                        />
+                                    </div>
+                                </div>
+
                                 {filteredMangas.map((manga, index) => (
                                     <div
                                         key={index}
@@ -264,12 +302,13 @@ const MangasAuth = () => {
                                         <div className="absolute top-2 left-4 flex gap-2 z-10">
                                             <button
                                                 className="w-4 h-4 flex items-center justify-center bg-transparent text-black rounded-full border-black hover:bg-violet-200 transition-colors"
-                                                onClick={() => {/* función para añadir capítulo */ }}
+                                                onClick={() => navigate(`/createchapter/${manga._id}`)}
                                             >
                                                 <img src={add} alt="Add" className="w-full h-full object-contain" />
                                             </button>
                                             <button
                                                 className="w-4 h-4 flex items-center justify-center bg-transparent text-black rounded-full border-black hover:bg-violet-200 transition-colors"
+                                                onClick={() => navigate(`/manga-details/${manga._id}/1`)}
                                             >
                                                 <img src={edit} alt="Edit" className="w-full h-full object-contain" />
                                             </button>
@@ -291,17 +330,28 @@ const MangasAuth = () => {
                                             >
                                                 {manga.category_id.name}
                                             </p>
+
                                             <div className="flex gap-2">
-                                                <button className="px-4 py-1 bg-violet-100 text-violet-600 rounded-full text-sm hover:bg-violet-200 transition-colors">
-                                                    Edit
+                                                <button
+                                                    className="px-1 py-1 bg-violet-100 text-violet-600 rounded-full text-sm hover:bg-violet-200 transition-colors flex items-center justify-center sm:px-4 sm:w-auto w-full"
+                                                    onClick={() => navigate(`/editmanga/`)}
+                                                >
+                                                    <span className="hidden sm:inline">Edit</span>
+                                                    <span className="sm:hidden">
+                                                        <PencilIcon className="h-4 w-4 sm:h-6 sm:w-6 text-violet-600" />
+                                                    </span>
                                                 </button>
                                                 <button
-                                                    className="px-4 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200 transition-colors"
+                                                    className="px-1 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200 transition-colors flex items-center justify-center sm:px-4 sm:w-auto w-full"
                                                     onClick={() => handleDeleteManga(manga._id)}
                                                 >
-                                                    Delete
+                                                    <span className="hidden sm:inline">Delete</span>
+                                                    <span className="sm:hidden">
+                                                        <TrashIcon className="h-4 w-4 sm:h-6 sm:w-6 text-red-600" />
+                                                    </span>
                                                 </button>
                                             </div>
+
                                         </div>
 
                                         {/* Manga Cover */}
@@ -319,6 +369,7 @@ const MangasAuth = () => {
                                     </div>
                                 ))}
                             </div>
+
                         ) : (
                             <div className="text-center">No mangas found.</div>
                         )}
