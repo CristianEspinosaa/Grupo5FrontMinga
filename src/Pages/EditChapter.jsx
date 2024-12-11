@@ -13,17 +13,11 @@ const EditChapter = () => {
                         className="max-w-full h-auto"
                     />
                 </div>
-<<<<<<< HEAD
 
                 {/* Sección de formulario */}
                 <div className="flex flex-col items-center p-6 rounded-lg w-full lg:w-3/4">
                     <h2 className="text-2xl font-semibold mb-6 text-center">Edit Manga</h2>
                     <form className="flex flex-col items-center w-full">
-=======
-                <div className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-3/4">
-                    <h2 className="text-2xl font-semibold mb-24 text-center">Edit Chapter</h2>
-                    <form className="flex flex-col items-center p-6 rounded-lg w-2/3 lg:w-full">
->>>>>>> 5f04271326e6dedb30bc47313970214376163e60
                         <input
                             type="text"
                             name="nameOfManga"
@@ -54,21 +48,13 @@ const EditChapter = () => {
                         />
                         <button
                             type="submit"
-<<<<<<< HEAD
                             className="w-full h-12 p-2 mt-6 mb-4 font-semibold text-white text-xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
-=======
-                            className="w-full h-16 p-2 mt-6 mb-4 font-semibold text-white text-2xl bg-[#34D399] rounded-full hover:bg-[#4de0aa]"
->>>>>>> 5f04271326e6dedb30bc47313970214376163e60
                         >
                             Edit
                         </button>
                         <button
                             type="button"
-<<<<<<< HEAD
                             className="w-full h-12 mt-4 p-2 text-[#EE8380] font-semibold text-xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
-=======
-                            className="w-full h-16 mt-4 p-2 text-[#EE8380] font-semibold text-2xl bg-[#FBDDDC] rounded-full hover:bg-[#ed7a76] hover:text-white"
->>>>>>> 5f04271326e6dedb30bc47313970214376163e60
                         >
                             Delete
                         </button>
