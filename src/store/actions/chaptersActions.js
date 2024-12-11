@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Acción para obtener los capítulos
 export const fetchChaptersRequest = () => ({
   type: 'FETCH_CHAPTERS_REQUEST',
 });
@@ -15,7 +14,6 @@ export const fetchChaptersFailure = (error) => ({
   payload: error,
 });
 
-// Acción asíncrona para obtener los capítulos desde la API
 export const fetchChapters = (id, newIndex, token) => {
   return async (dispatch) => {
     dispatch(fetchChaptersRequest());

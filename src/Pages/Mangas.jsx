@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchTerm } from '../store/actions/searchActions';
 import { readCategories } from '../store/actions/categoriesActions';
 import { readMangas } from '../store/actions/mangasActions';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/FondoManga2.jpeg';
 
 const Mangas = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Inicializa navigate aquí
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
   const { mangas } = useSelector((state) => state.mangas);
   const searchTerm = useSelector((state) => state.search.searchTerm);
@@ -107,8 +107,8 @@ const Mangas = () => {
   };
 
   const pageMangas = useMemo(() => {
-    const startIndex = (pageNumber - 1) * 10; // Asume que quieres 10 mangas por página
-    return filteredMangas.slice(startIndex, startIndex + 10); // Extrae los mangas correspondientes a la página actual
+    const startIndex = (pageNumber - 1) * 10;
+    return filteredMangas.slice(startIndex, startIndex + 10); 
   }, [filteredMangas, pageNumber]);
 
   return (
@@ -130,8 +130,8 @@ const Mangas = () => {
                   <input
                     type="text"
                     placeholder="Find your manga here"
-                    value={searchTerm} // Mantén el valor desde Redux
-                    onChange={handleSearchChange} // Usa la función handleSearchChange para actualizar Redux
+                    value={searchTerm}
+                    onChange={handleSearchChange} 
                     className="w-full py-3 px-12 rounded-full bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none"
                   />
                 </div>

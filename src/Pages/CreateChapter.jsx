@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreateChapter() {
     const token = localStorage.getItem("token");
-    const navigate = useNavigate(); // Hook para redirección
+    const navigate = useNavigate();
     const [mangaId, setMangaId] = useState(null);
     const [chapterData, setChapterData] = useState({
         title: '',
@@ -66,8 +66,8 @@ export default function CreateChapter() {
     };
 
     const handleBackToHome = (e) => {
-        e.preventDefault(); // Evita el comportamiento por defecto del botón
-        navigate('/mangas-manager'); // Redirige al inicio
+        e.preventDefault();
+        navigate('/mangas-manager');
     };
 
     return (
@@ -116,9 +116,9 @@ export default function CreateChapter() {
                     Create Chapter
                 </button>
                 <button
-                    type="button" // Cambia a "button" para evitar que actúe como submit
+                    type="button"
                     className="w-3/5 h-12 bg-[#4338CA] text-white rounded-full text-xl cursor-pointer mt-4"
-                    onClick={handleBackToHome} // Agrega el manejador de clic
+                    onClick={handleBackToHome}
                 >
                     My Mangas
                 </button>

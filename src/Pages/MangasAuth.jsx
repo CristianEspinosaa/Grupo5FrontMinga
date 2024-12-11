@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { readCategories } from "../store/actions/categoriesActions";
 import backgroundImage from "../assets/manga-read.jpg";
@@ -23,9 +23,8 @@ const MangasAuth = () => {
 
     const token = localStorage.getItem("token");
 
-    // Cargar categorías desde Redux
     useEffect(() => {
-        dispatch(readCategories()); // Despachamos la acción para cargar las categorías
+        dispatch(readCategories());
     }, [dispatch]);
 
     // Validar el token y obtener el autor
@@ -69,7 +68,6 @@ const MangasAuth = () => {
         }
     }, [token]);
 
-    // Leer mangas
     useEffect(() => {
         const fetchMangas = async () => {
             if (!authorId) return;

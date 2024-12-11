@@ -7,7 +7,6 @@ export const READ_MANGASBYID_ERROR = "READ_MANGASBYID_ERROR";
 
 const apiUrlMangas = "http://localhost:8080/api/mangas/";
 
-// Acción asincrónica para obtener mangas
 export const readMangas = (searchTerm, pageNumber, selectedCategory) => async (dispatch) => {
   const token = localStorage.getItem("token");
   const headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -15,7 +14,7 @@ export const readMangas = (searchTerm, pageNumber, selectedCategory) => async (d
   try {
     const categoryParam =
       selectedCategory === 'all'
-        ? '' // Enviar vacío si es "all"
+        ? ''
         : selectedCategory;
 
     const response = await axios.get(
@@ -36,7 +35,6 @@ export const readMangas = (searchTerm, pageNumber, selectedCategory) => async (d
   }
 };
 
-// Acción asincrónica para obtener mangas por autor
 export const readMangasByAuthor = (authorId, pageNumber, searchTerm, selectedCategory) => async (dispatch) => {
   const token = localStorage.getItem("token");
   const headers = { headers: { Authorization: `Bearer ${token}` } };

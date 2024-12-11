@@ -66,7 +66,6 @@ const Chapter = () => {
     return <div>Error: {error}</div>;
   }
 
-  // Verificar que `chapter?.pages` no sea vacío
   const pages = chapter?.pages || [];
 
   return (

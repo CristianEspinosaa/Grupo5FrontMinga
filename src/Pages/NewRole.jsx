@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importar el hook useNavigate
+import { useNavigate } from 'react-router-dom';
 import rectangle8 from '../assets/Rectangle8.png';
 import img1 from '../assets/author-1.png';
 import img2 from '../assets/author-2.png';
@@ -10,14 +10,14 @@ import img6 from '../assets/company-3.png';
 
 const NewRole = () => {
   const [selectedRole, setSelectedRole] = useState(null);
-  const navigate = useNavigate(); // Crear la instancia de navigate
+  const navigate = useNavigate();
 
   const handleSelectRole = (role) => {
     setSelectedRole(role);
     if (role === 1) {
-      navigate('/createauthor'); // Redirige a la página de edición de autor
+      navigate('/createauthor');
     } else if (role === 2) {
-      navigate('/createcompany'); // Redirige a la página de edición de empresa (opcional)
+      navigate('/createcompany');
     }
   };
 

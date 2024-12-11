@@ -100,8 +100,6 @@ export default function CreateManga() {
         try {
             const response = await axios.post(url, data, headers);
             toast.success("Manga created successfully.");
-
-            // Redirige a la página de creación de capítulos con el manga_id
             const mangaId = response.data.response._id; // Obtén el manga_id
             navigate(`/createchapter/${mangaId}`); // Redirige al formulario de capítulo con el manga_id
 

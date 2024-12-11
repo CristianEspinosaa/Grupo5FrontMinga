@@ -13,11 +13,11 @@ const loginWithToken = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data.response; // Devuelve el usuario si el token es válido
+    return response.data.response;
   } catch (error) {
     console.log("Error", error);
     if (error.message === "Request failed with status code 401") {
-      localStorage.removeItem("token"); // Elimina solo el token si no es válido
+      localStorage.removeItem("token");
       return null;
     }
   }
@@ -32,13 +32,13 @@ export default function Home() {
     const token = params.get("token");
 
     if (token) {
-      localStorage.setItem("token", token); // Almacena solo el token
+      localStorage.setItem("token", token);
       loginWithToken(token).then((user) => {
         if (user) {
-          dispatch(setUser({ user, token })); // Actualiza Redux con la info del usuario y el token
+          dispatch(setUser({ user, token }));
           navigate("/home");
         } else {
-          navigate("/login"); // Si no se valida, redirige al login
+          navigate("/login");
         }
       });
     }

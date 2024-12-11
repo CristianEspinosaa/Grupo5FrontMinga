@@ -6,7 +6,7 @@ import {
   LOGIN_FAILURE, 
   SET_USER, 
   LOGOUT 
-} from '../actions/authActions'; // Asegúrate de que la ruta sea correcta
+} from '../actions/authActions'; 
 
 const initialState = {
   user: null,

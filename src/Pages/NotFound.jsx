@@ -9,7 +9,7 @@ export default function NotFound() {
           <p className="text-[48px] font-semibold text-indigo-600">SORRY, 404</p>
           {/* Imagen de manga */}
           <img
-            src="https://stickershop.line-scdn.net/stickershop/v1/product/11419726/LINEStorePC/main.png?v=1" // Cambia esta URL por la de tu imagen
+            src="https://stickershop.line-scdn.net/stickershop/v1/product/11419726/LINEStorePC/main.png?v=1" 
             alt="Manga Image"
             className="mx-auto mb-6"
             style={{ maxWidth: '300px' }}

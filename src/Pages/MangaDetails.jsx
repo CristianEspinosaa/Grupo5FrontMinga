@@ -11,7 +11,7 @@ import ChapterList from "../Components/ChapterList";
 
 const MangaDetails = () => {
   const [activeTab, setActiveTab] = useState("manga");
-  const { id, newIndex } = useParams();  // Obtener el ID y newIndex de la URL
+  const { id, newIndex } = useParams();
   const dispatch = useDispatch();
 
   const { mangaDetails, loading, error } = useSelector((state) => state.mangas);
@@ -100,10 +100,8 @@ const MangaDetails = () => {
           <div className="p-4 flex-1 overflow-auto">
             <div className="mb-8 flex items-center justify-center">
               <h2 className="font-bold text-2xl">Chapters</h2>
-            </div>
-
-            {/* Aquí se carga el componente de capítulos */}
-            <ChapterList id={id} newIndex={newIndex} /> {/* Pasa el ID del manga y newIndex */}
+            </div>            
+            <ChapterList id={id} newIndex={newIndex} />
           </div>
         )}
 
