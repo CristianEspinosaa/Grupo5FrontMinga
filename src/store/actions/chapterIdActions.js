@@ -4,6 +4,7 @@ export const GET_CHAPTERID_SUCCESS = 'GET_CHAPTERID_SUCCESS';
 export const GET_CHAPTERID_FAILURE = 'GET_CHAPTERID_FAILURE';
 
 export const getChapterById = (id) => async (dispatch) => {
+
   const token = localStorage.getItem('token');
   const headers = {
     Authorization: `Bearer ${token}`,

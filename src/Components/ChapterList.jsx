@@ -61,7 +61,7 @@ const ChapterList = () => {
               </div>
 
               <Button
-                onClick={() => navigate(`/chapter/${chapter._id}/0`)}
+                onClick={() => navigate(`/chapter/${chapter._id}/1`)}
                 variant="contained"
                 color="primary"
                 sx={{

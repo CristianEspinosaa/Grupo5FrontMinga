@@ -25,7 +25,7 @@ const Chapter = () => {
     setIndex((prevIndex) => {
       const newIndex = prevIndex - 1;
       if (newIndex < 0 && chapter?.order === 1) {
-        navigate(`/manga/${chapter.manga_id}/1`);
+        navigate(`/manga-details/${chapter.manga_id}/1`);
         return newIndex;
       } else if (newIndex < 0) {
         navigate(`/chapter/${prev}/0`);
@@ -34,6 +34,7 @@ const Chapter = () => {
       }
       navigate(`/chapter/${id}/${newIndex}`);
       return newIndex;
+      
     });
   };
 
@@ -41,7 +42,7 @@ const Chapter = () => {
     setIndex((prevIndex) => {
       const newIndex = prevIndex + 1;
       if (newIndex >= chapter?.pages?.length) {
-        navigate(`/chapter/${next}/0`);
+        navigate(`/chapter/${next}/1`);
         window.location.reload(true);
         return newIndex;
       }
