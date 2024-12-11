@@ -1,49 +1,40 @@
 import axios from 'axios';
 
-export const READ_CHAPTERS_SUCCESS = "READ_CHAPTERS_SUCCESS";
-export const READ_CHAPTERS_ERROR = "READ_CHAPTERS_ERROR";
-export const GET_CHAPTER_BY_ID_SUCCESS = "GET_CHAPTER_BY_ID_SUCCESS";
-export const GET_CHAPTER_BY_ID_ERROR = "GET_CHAPTER_BY_ID_ERROR";
+// Acción para obtener los capítulos
+export const fetchChaptersRequest = () => ({
+  type: 'FETCH_CHAPTERS_REQUEST',
+});
 
-const apiUrlChapters = "http://localhost:8080/api/chapters/byManga/";
+export const fetchChaptersSuccess = (chapters, count) => ({
+  type: 'FETCH_CHAPTERS_SUCCESS',
+  payload: { chapters, count },
+});
 
-export const getChapterById = (id) => async (dispatch) => {
-    const token = localStorage.getItem("token");
-    const headers = { headers: { Authorization: `Bearer ${token}` } };
-  
+export const fetchChaptersFailure = (error) => ({
+  type: 'FETCH_CHAPTERS_FAILURE',
+  payload: error,
+});
+
+// Acción asíncrona para obtener los capítulos desde la API
+export const fetchChapters = (id, newIndex, token) => {
+  return async (dispatch) => {
+    dispatch(fetchChaptersRequest());
     try {
-      const response = await axios.get(`http://localhost:8080/api/chapters/id/${id}`, headers);
-  
-      dispatch({
-        type: "GET_CHAPTER_BY_ID_SUCCESS",
-        payload: response.data.response || {},
+      const response = await axios.get(`http://localhost:8080/api/chapters/byManga/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          page: newIndex,
+        },
       });
+      if (response.data.success) {
+        dispatch(fetchChaptersSuccess(response.data.response.chapters, response.data.response.count));
+      } else {
+        dispatch(fetchChaptersFailure(response.data.message));
+      }
     } catch (error) {
-      console.error("Error fetching chapter by ID:", error);
-      dispatch({
-        type: "GET_CHAPTER_BY_ID_ERROR",
-        payload: error.message,
-      });
+      dispatch(fetchChaptersFailure(error.message));
     }
   };
-
-
-export const readChaptersByMangaId = (mangaId) => async (dispatch) => {
-  const token = localStorage.getItem("token");
-  const headers = { headers: { Authorization: `Bearer ${token}` } };
-
-  try {
-    const response = await axios.get(`${apiUrlChapters}${mangaId}`, headers);
-
-    dispatch({
-      type: READ_CHAPTERS_SUCCESS,
-      payload: response.data.response || [],
-    });
-  } catch (error) {
-    console.error("Error fetching chapters:", error);
-    dispatch({
-      type: READ_CHAPTERS_ERROR,
-      payload: error.message,
-    });
-  }
 };

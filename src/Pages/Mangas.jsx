@@ -60,7 +60,7 @@ const Mangas = () => {
 
   // Función para manejar el click en "Read"
   const handleReadClick = (mangaId) => {
-    navigate(`/manga-details/${mangaId}`); // Redirige a la página de detalles del manga
+    navigate(`/manga-details/${mangaId}/1`); // Redirige a la página de detalles del manga
   };
 
   // Estilos de categoría

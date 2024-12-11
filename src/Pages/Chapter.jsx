@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChapterById } from '../store/actions/chapterIdActions';
-import { Button } from '@mui/material';
+
+import { Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { motion } from 'framer-motion';
@@ -63,6 +64,9 @@ const Chapter = () => {
     return <div>Error: {error}</div>;
   }
 
+  // Verificar que `chapter?.pages` no sea vacío
+  const pages = chapter?.pages || [];
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="bg-gradient-to-r from-[#4436cb] to-[#5d51f2] text-white h-[6%] w-full flex justify-center items-center py-2">
@@ -80,28 +84,33 @@ const Chapter = () => {
       >
         <img
           className="object-contain h-[65vh] w-full lg:h-[80vh]"
-          src={chapter?.pages?.[index]}
-          alt="comicimage"
+          src={pages[index]}
+          alt=""
         />
       </motion.div>
 
-      {/* Selector de página */}
-      <div className="mt-4">
-        <select
-          className="p-2 bg-white text-black rounded"
-          value={index}
-          onChange={handlePageSelect}
-        >
-          {chapter?.pages?.map((_, idx) => (
-            <option key={idx} value={idx}>
-              Página {idx + 1}
-            </option>
-          ))}
-        </select>
+      {/* Selector de página con Material-UI */}
+      <div className="-mt-10 py-6 w-30 absolute bottom-4 left-1/2 transform -translate-x-1/2 md:bottom-4 md:right-16 md:left-auto md:transform-none md:w-auto z-20">
+        <FormControl fullWidth>
+          <InputLabel>Pages</InputLabel>
+          <Select
+            value={pages.length > 0 ? index : ""}
+            onChange={handlePageSelect}
+            label="Selecciona la Página"
+            variant="outlined"
+            disabled={pages.length === 0} // Deshabilitar si no hay páginas
+          >
+            {pages.map((_, idx) => (
+              <MenuItem key={idx} value={idx}>
+                Page {idx + 1}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
 
       {/* Botones de navegación */}
-      <div className="absolute bottom-10 left-0 right-0 flex justify-between px-4 md:px-20 md:bottom-1/2 md:transform md:translate-y-7">
+      <div className="absolute bottom-10 left-0 right-0 flex justify-between px-4 md:px-20 md:bottom-1/2 md:transform md:translate-y-8">
         <Button
           variant="contained"
           color="primary"
@@ -111,9 +120,9 @@ const Chapter = () => {
             borderRadius: '50%',
             padding: '1rem',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            backgroundColor: '#1976d2',
+            backgroundColor: '#4436cb',
             '&:hover': {
-              backgroundColor: '#115293',
+              backgroundColor: '#5d51f2',
               boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
             },
           }}
@@ -130,9 +139,9 @@ const Chapter = () => {
             borderRadius: '50%',
             padding: '1rem',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            backgroundColor: '#1976d2',
+            backgroundColor: '#4436cb',
             '&:hover': {
-              backgroundColor: '#115293',
+              backgroundColor: '#5d51f2',
               boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
             },
           }}

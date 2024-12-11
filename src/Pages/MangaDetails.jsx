@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react"; // Asegúrate de importar useEffect
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { readMangaById } from "../store/actions/mangasActions";
+import React, { useState, useEffect } from "react"; 
+import { useParams, useNavigate } from "react-router-dom"; 
+import { useDispatch, useSelector } from "react-redux"; 
+import { readMangaById } from "../store/actions/mangasActions"; 
 
-import reaction1 from "../assets/manitoArriba.png";
-import reaction2 from "../assets/manitoAbajo.png";
-import reaction3 from "../assets/caraSorprendida.png";
-import reaction4 from "../assets/caraEnamorada.png";
-import iconComment from "../assets/iconComment1.png";
+import reaction1 from "../assets/manitoArriba.png"; 
+import reaction2 from "../assets/manitoAbajo.png"; 
+import reaction3 from "../assets/caraSorprendida.png"; 
+import reaction4 from "../assets/caraEnamorada.png"; 
+import ChapterList from "../Components/ChapterList";
 
 const MangaDetails = () => {
   const [activeTab, setActiveTab] = useState("manga");
-  const { id } = useParams(); // Obtén el ID de la URL
-  const navigate = useNavigate(); // Para manejar la navegación
+  const { id, newIndex } = useParams();  // Obtener el ID y newIndex de la URL
   const dispatch = useDispatch();
 
   const { mangaDetails, loading, error } = useSelector((state) => state.mangas);
@@ -23,10 +22,6 @@ const MangaDetails = () => {
     }
   }, [id, dispatch]);
 
-  useEffect(() => {
-    console.log("Manga Details:", mangaDetails);
-  }, [mangaDetails]);
-
   if (loading) {
     return <div className="text-center mt-10">Loading...</div>;
   }
@@ -35,7 +30,6 @@ const MangaDetails = () => {
     return <div className="text-center mt-10 text-red-500">{error}</div>;
   }
 
-  // Validación para asegurar que mangaDetails no sea null o undefined
   if (!mangaDetails || !mangaDetails.cover_photo) {
     return <div className="text-center mt-10 text-red-500">Manga details not found or missing cover photo.</div>;
   }
@@ -43,7 +37,7 @@ const MangaDetails = () => {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gray-100 overflow-hidden">
       {/* Imagen como fondo en pantallas móviles */}
-      <div        
+      <div
         className="absolute inset-0 bg-cover lg:h-[60vh] lg:w-[100vw] object-top lg:top-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:block hidden"
         style={{
           backgroundImage: `url(${mangaDetails.cover_photo})`,
@@ -56,7 +50,6 @@ const MangaDetails = () => {
         <div className="relative lg:hidden h-1/2 w-full">
           <img src={mangaDetails.cover_photo} alt="Manga Cover" className="w-full h-full object-cover" />
         </div>
-        
 
         {activeTab === "manga" && (
           <div className="p-10 flex-1 overflow-auto">
@@ -109,19 +102,8 @@ const MangaDetails = () => {
               <h2 className="font-bold text-2xl">Chapters</h2>
             </div>
 
-            {[1, 2, 3, 4, 5].map((chapter, index) => (
-              <div key={index} className="flex items-center justify-between p-3 rounded-lg shadow-sm">
-                <img src={iconComment} alt={`Chapter ${chapter}`} className="w-12 h-12 rounded-lg" />
-                <div className="mx-3 flex flex-col flex-1">
-                  <h4 className="text-md font-semibold">Chapter #{chapter}</h4>
-                  <div className="flex items-center">
-                    <img src={iconComment} alt="Comment" className="w-6 h-6" />
-                    <p className="text-sm text-gray-500 ml-1">125 Comments</p>
-                  </div>
-                </div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-full">Read</button>
-              </div>
-            ))}
+            {/* Aquí se carga el componente de capítulos */}
+            <ChapterList id={id} newIndex={newIndex} /> {/* Pasa el ID del manga y newIndex */}
           </div>
         )}
 

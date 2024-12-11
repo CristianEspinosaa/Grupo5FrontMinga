@@ -206,7 +206,7 @@ const MangasAuth = () => {
                 <div className="absolute inset-0 bg-black/40">
                     <div className="container mx-auto h-full flex flex-col justify-center items-center text-white px-4">
                         <h1 className="text-4xl font-bold mb-8">
-                            {authorId ? `${authorName}` : "Loading Author..."}
+                            {authorId ? `${authorName}` : "Hi"}
                         </h1>
                         <div className="w-full max-w-xl">
                             <div className="bg-white/95 rounded-full shadow-lg p-2">
@@ -324,7 +324,7 @@ const MangasAuth = () => {
                         )}
                     </div>
                     {/* Condición para mostrar paginador si hay más de 6 mangas */}
-                    {filteredMangas.length > 4 && (
+                    {filteredMangas.length > 6 && (
                         <div className="flex justify-center items-center gap-4 py-6">
                             <div className="flex items-center">
                                 {pageNumber < 2 ? "" : (
