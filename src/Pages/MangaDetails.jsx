@@ -31,7 +31,7 @@ const MangaDetails = () => {
   }
 
   if (!mangaDetails || !mangaDetails.cover_photo) {
-    return <div className="text-center mt-10 text-red-500">Manga details not found or missing cover photo.</div>;
+    return <div className="text-center mt-10 text-red-500"></div>;
   }
 
   return (
