@@ -17,6 +17,13 @@ import PrivateRoute from './Components/PrivateRoute.jsx';
 import AuthorCompanyRoute from './Components/AuthorCompanyRoute.jsx';
 import MangaDetails from './Pages/MangaDetails.jsx';
 import Chapter from './Pages/Chapter.jsx';
+import NewRole from './Pages/NewRole.jsx';
+import CreateAuthor from './Pages/CreateAuthor.jsx';
+import CreateCompany from './Pages/CreateCompany.jsx';
+import CreateManga from './Pages/CreateManga.jsx';
+import EditAuthor from './Pages/Profile.jsx';
+import CreateChapter from './Pages/CreateChapter.jsx';
+import EditChapter from './Pages/EditChapter.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,9 +38,6 @@ const router = createBrowserRouter([
       { path: "/register", element: <SignRoute><Register /></SignRoute> },
       { path: "/login", element: <SignRoute><Login /></SignRoute> },
       { path: "/dashboard", element: <AdminRoute><DashBoard /></AdminRoute> },
-<<<<<<< HEAD
-=======
-
       { path: "/newrole", element: <PrivateRoute><NewRole /></PrivateRoute> },
       { path: "/createauthor", element: <PrivateRoute><CreateAuthor /></PrivateRoute> },
       { path: "/createcompany", element: <PrivateRoute><CreateCompany /></PrivateRoute> },
@@ -41,8 +45,6 @@ const router = createBrowserRouter([
       { path: "/profile", element: <PrivateRoute><EditAuthor /></PrivateRoute> },
       { path: "/createchapter/:id", element: <PrivateRoute><CreateChapter /></PrivateRoute> },
       { path: "/editchapter/", element: <PrivateRoute><EditChapter /></PrivateRoute> },
-      
->>>>>>> goyes
       { path: "*", element: <NotFound /> },
     ],
   },

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import logMinga from "../assets/log_minga.jpg";
 import backgroundLogin from "../assets/Background_lognup.jpeg";
 import { register } from "../store/actions/registerActions";
 

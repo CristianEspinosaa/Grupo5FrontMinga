@@ -11,39 +11,47 @@ const CreateAuthor = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    formRef.current = new FormData(event.target);
-
+    
+    const token = useSelector(state => state.auth.token); // Añade esto
+    
+    if (!token) {
+      toast.error("You need to be logged in to create an author");
+      return;
+    }
+  
     const name = formRef.current.get('name');
     const lastName = formRef.current.get('last_name');
     const cityCountry = formRef.current.get('city-country');
     const date = formRef.current.get('date');
     const photo = formRef.current.get('photo');
     const array = cityCountry.split(',');
-
+  
     if (array.length === 2) {
       const data = {
         name,
         last_name: lastName,
-        city: array[0],
-        country: array[1],
+        city: array[0].trim(),
+        country: array[1].trim(),
         date,
         photo,
       };
-
-      dispatch(createAuthor(data));
-
-      if (error) {
-        toast.error("Error");
-      } else {
+  
+      console.log('Data being sent:', data); // Añade esto para depurar
+  
+      try {
+        await dispatch(createAuthor(data));
         toast.success('Author created successfully');
-        window.location.href = '/'; // Redirigir al home
+        event.target.reset();
+        window.location.href = '/';
+      } catch (error) {
+        console.log('Error creating author:', error);
+        
+        toast.error(error.message || "Error creating author");
       }
-
-      event.target.reset();
     } else {
-      toast.error("Error in your credentials (don't forget the comma after the city)");
+      toast.error("Please enter city and country separated by a comma (e.g., 'New York, USA')");
     }
-  };  
+  };
 
   return (
     <div className="flex justify-center w-full h-screen bg-gray-200">

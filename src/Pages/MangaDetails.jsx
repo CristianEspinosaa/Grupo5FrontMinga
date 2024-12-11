@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Asegúrate de importar useEffect
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { readMangaById } from "../store/actions/mangasActions";

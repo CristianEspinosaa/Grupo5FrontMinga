@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import axios from 'axios';
 import image from '../assets/default-profile.png';
 

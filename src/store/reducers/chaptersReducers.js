@@ -1,5 +1,3 @@
-// reducers/chapterReducer.js
-
 import {
   GET_CHAPTER_BY_ID_SUCCESS,
   GET_CHAPTER_BY_ID_ERROR,

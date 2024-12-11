@@ -4,8 +4,6 @@ import { Search } from "lucide-react";
 import axios from "axios";
 import { readCategories } from "../store/actions/categoriesActions";
 import backgroundImage from "../assets/manga-read.jpg";
-import add from "../assets/add.png";
-import edit from "../assets/edit.png";
 import Swal from 'sweetalert2';
 
 const MangasAuth = () => {

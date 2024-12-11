@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchTerm } from '../store/actions/searchActions';
 import { readCategories } from '../store/actions/categoriesActions';
 import { readMangas } from '../store/actions/mangasActions';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/FondoManga2.jpeg';
 
 const Mangas = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Inicializa navigate aquí
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
   const { mangas } = useSelector((state) => state.mangas);
   const searchTerm = useSelector((state) => state.search.searchTerm);
