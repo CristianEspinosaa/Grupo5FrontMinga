@@ -5,7 +5,7 @@ const EditChapter = () => {
         <div className="flex items-center justify-center h-screen w-">
             <div className="flex flex-col lg:flex-row-reverse lg:items-center justify-center lg:justify-around rounded-2xl bg-white p-6 lg:p-8 w-2/3 max-w-4xl">
                 <div className="hidden lg:flex flex-col items-center p-6 rounded-lg w-full lg:w-full">
-                    <h2 className="text-lg font-light mb-4">Chapter #1 - Discover the word</h2>
+                    <h2 className="text-lg font-light mb-4">Chapter 1 - Discover the word</h2>
                     <img
                         src={img1}
                         alt="User Profile"

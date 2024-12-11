@@ -32,7 +32,7 @@ const SignupPage = () => {
 
       {/* Content Container */}
       <div className="relative z-10 flex flex-row-reverse w-full min-h-screen">
-        {/* Background Image Side - Ahora a la derecha */}
+        {/* Background Image Side  */}
         <div className="hidden lg:flex lg:w-1/2">
           <div className="w-full bg-cover bg-center bg-no-repeat relative">
             <div className="absolute inset-0 bg-indigo-900/30"></div>
