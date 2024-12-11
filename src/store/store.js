@@ -7,6 +7,7 @@ import mangasReducer from './reducers/mangasReducers';
 import modalReducer from './reducers/modalReducers';
 import searchReducer from './reducers/searchReducer';
 import chaptersReducer from './reducers/chaptersReducers';
+import chapterIdReducer from './reducers/chapterIdReducers';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     mangas: mangasReducer,
     search: searchReducer,
     chapter: chaptersReducer,
+    chapterId: chapterIdReducer,
     modal: modalReducer,  
   },
 });

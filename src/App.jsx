@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       { path: "/mangas", element: <PrivateRoute><Mangas /></PrivateRoute> },
       { path: "/mangas-manager", element: <PrivateRoute><AuthorCompanyRoute><MangasAuth /></AuthorCompanyRoute></PrivateRoute>},
       { path: "/manga-details/:id", element: <PrivateRoute><MangaDetails /></PrivateRoute> },
-      { path: "/chapter/:id", element: <PrivateRoute><Chapter /></PrivateRoute> },
+      { path: "/chapter/:id/:newIndex", element: <PrivateRoute><Chapter /></PrivateRoute> },
       { path: "/register", element: <SignRoute><Register /></SignRoute> },
       { path: "/login", element: <SignRoute><Login /></SignRoute> },
       { path: "/dashboard", element: <AdminRoute><DashBoard /></AdminRoute> },
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       { path: "/createcompany", element: <PrivateRoute><CreateCompany /></PrivateRoute> },
       { path: "/createmanga", element: <PrivateRoute><CreateManga /></PrivateRoute> },
       { path: "/profile", element: <PrivateRoute><EditAuthor /></PrivateRoute> },
-      { path: "/createchapter/:id", element: <PrivateRoute><CreateChapter /></PrivateRoute> },
+      { path: "/createchapter/:id/", element: <PrivateRoute><CreateChapter /></PrivateRoute> },
       { path: "/editchapter/", element: <PrivateRoute><EditChapter /></PrivateRoute> },
       
       { path: "*", element: <NotFound /> },

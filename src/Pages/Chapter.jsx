@@ -1,100 +1,144 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChapterById } from '../store/actions/chapterIdActions';
+import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { motion } from 'framer-motion';
 
 const Chapter = () => {
   let navigate = useNavigate();
-  let { id, page } = useParams(); // Obtener 'id' y 'page' desde la URL
-  let [chapter, setChapter] = useState({});
-  let [next, setNext] = useState('');
-  let [prev, setPrev] = useState('');
-  let [index, setIndex] = useState(parseInt(page) || 0); // Asignar valor por defecto
+  const { id, page } = useParams();
+  const dispatch = useDispatch();
 
-  const url = 'http://localhost:8080/api/chapters/id/'; // URL base para la API
+  const { chapter, prev, next, loading, error } = useSelector((state) => state.chapterId);
+
+  const [index, setIndex] = useState(parseInt(page) || 0);
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Obtener el token del localStorage
-    const headers = {
-      Authorization: `Bearer ${token}`, // Agregar el token en el encabezado
-    };
-
-    // Llamada a la API para obtener el capítulo por ID
-    axios
-      .get(`${url}${id}`, { headers })  // Concatenar la URL con el 'id' y pasar los headers
-      .then((response) => {
-        setChapter(response.data.response.chapter);
-        setPrev(response.data.response.prev);
-        setNext(response.data.response.next);
-      })
-      .catch((error) => console.log('Error fetching chapter:', error));
-  }, [id]); // Dependencia de 'id' para que se ejecute cuando cambie
+    dispatch(getChapterById(id));
+  }, [dispatch, id]);
 
   const handlePrev = () => {
-    setIndex(prevIndex => {
+    setIndex((prevIndex) => {
       const newIndex = prevIndex - 1;
-      if (newIndex < 0 && chapter.order === 1) {
-        // Si estamos en la primera página, navegar al primer capítulo del manga
+      if (newIndex < 0 && chapter?.order === 1) {
         navigate(`/manga/${chapter.manga_id}/1`);
         return newIndex;
       } else if (newIndex < 0) {
-        // Si llegamos al principio del capítulo, navegar al capítulo previo
-        navigate(`/chapters/${prev}/0`);
-        window.location.reload(true); // Forzar la recarga de la página
+        navigate(`/chapter/${prev}/0`);
+        window.location.reload(true);
         return newIndex;
       }
-      navigate(`/chapters/${id}/${newIndex}`); // Navegar a la página anterior
+      navigate(`/chapter/${id}/${newIndex}`);
       return newIndex;
     });
   };
 
   const handleNext = () => {
-    setIndex(prevIndex => {
+    setIndex((prevIndex) => {
       const newIndex = prevIndex + 1;
-      if (newIndex >= chapter.pages?.length) {
-        // Si estamos en la última página, navegar al siguiente capítulo
-        navigate(`/chapters/${next}/0`);
-        window.location.reload(true);  // Forzar la recarga de la página
+      if (newIndex >= chapter?.pages?.length) {
+        navigate(`/chapter/${next}/0`);
+        window.location.reload(true);
         return newIndex;
       }
-      navigate(`/chapters/${id}/${newIndex}`); // Navegar a la página siguiente
+      navigate(`/chapter/${id}/${newIndex}`);
       return newIndex;
     });
   };
 
+  const handlePageSelect = (e) => {
+    const selectedPage = parseInt(e.target.value);
+    setIndex(selectedPage);
+    navigate(`/chapter/${id}/${selectedPage}`);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="bg-gradient-to-r from-[#4436cb] to-[#5d51f2] text-white h-[6%] w-full flex justify-center items-center py-2">
-        <h4>Cap N° {chapter.order} - {chapter.title}</h4>
+        <h4>Cap N° {chapter?.order} - {chapter?.title}</h4>
       </div>
 
-      <div className="h-[70%] w-full flex justify-center items-center py-6">
-        <div
-          className="relative flex items-center justify-center w-[21%] left-[20%]"
-          onClick={handlePrev}
-        >
-          <img
-            src="https://www.svgrepo.com/show/163122/backward-arrow.svg"
-            alt="prevarrow"
-            className="w-[0.8rem] bg-[#8080808a] p-[0.1rem]"
-          />
-        </div>
-
+      <motion.div
+        className="w-full flex justify-center items-center py-6"
+        style={{ height: '80vh' }}
+        key={index}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <img
-          className="object-contain h-full w-[40%]"
-          src={chapter.pages?.[index]}
+          className="object-contain h-[65vh] w-full lg:h-[80vh]"
+          src={chapter?.pages?.[index]}
           alt="comicimage"
         />
+      </motion.div>
 
-        <div
-          className="relative flex items-center justify-center w-[21%] right-[20%]"
-          onClick={handleNext}
+      {/* Selector de página */}
+      <div className="mt-4">
+        <select
+          className="p-2 bg-white text-black rounded"
+          value={index}
+          onChange={handlePageSelect}
         >
-          <img
-            src="https://www.svgrepo.com/show/109221/next.svg"
-            alt="nextarrow"
-            className="w-[0.8rem] bg-[#8080808a] p-[0.1rem]"
-          />
-        </div>
+          {chapter?.pages?.map((_, idx) => (
+            <option key={idx} value={idx}>
+              Página {idx + 1}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Botones de navegación */}
+      <div className="absolute bottom-10 left-0 right-0 flex justify-between px-4 md:px-20 md:bottom-1/2 md:transform md:translate-y-7">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={handlePrev}
+          sx={{
+            borderRadius: '50%',
+            padding: '1rem',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            backgroundColor: '#1976d2',
+            '&:hover': {
+              backgroundColor: '#115293',
+              boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
+            },
+          }}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </Button>
+
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          onClick={handleNext}
+          sx={{
+            borderRadius: '50%',
+            padding: '1rem',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            backgroundColor: '#1976d2',
+            '&:hover': {
+              backgroundColor: '#115293',
+              boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
+            },
+          }}
+        >
+          <ArrowForwardIcon fontSize="large" />
+        </Button>
       </div>
     </div>
   );
